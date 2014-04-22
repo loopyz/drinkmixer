@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E07B98AB-2C96-4967-98EF-03269D4B345E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Drink Mixer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>205C5127-0461-410A-AFF7-469268C2F2F8</key>
+		<string>https://github.com/loopyz/drinkmixer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Drink Mixer/Drink Mixer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>205C5127-0461-410A-AFF7-469268C2F2F8</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/loopyz/drinkmixer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>205C5127-0461-410A-AFF7-469268C2F2F8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>205C5127-0461-410A-AFF7-469268C2F2F8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>drinkmixer</string>
+		</dict>
+	</array>
+</dict>
+</plist>

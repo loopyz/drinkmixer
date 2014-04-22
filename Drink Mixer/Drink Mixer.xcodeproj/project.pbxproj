@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B0E09E8190703B20024C55A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0E09E7190703B20024C55A /* LoginViewController.m */; };
+		0B0E09EA190704210024C55A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0E09E9190704210024C55A /* FacebookSDK.framework */; };
+		0B0E09ED190704820024C55A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0E09EC190704820024C55A /* HomeViewController.m */; };
+		0B0E09EF1907064B0024C55A /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0E09EE1907064B0024C55A /* Firebase.framework */; };
+		0B0E09F11907091D0024C55A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0E09F01907091D0024C55A /* SystemConfiguration.framework */; };
+		0B0E09F31907096B0024C55A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0E09F21907096B0024C55A /* libc++.dylib */; };
+		0B0E09F9190709DD0024C55A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0E09F8190709DD0024C55A /* libicucore.dylib */; };
+		0B0E0A0A19070A180024C55A /* cocktails.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E09FC19070A170024C55A /* cocktails.png */; };
+		0B0E0A0B19070A180024C55A /* other.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E09FD19070A170024C55A /* other.png */; };
+		0B0E0A0C19070A180024C55A /* protein.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E09FE19070A170024C55A /* protein.png */; };
+		0B0E0A0D19070A180024C55A /* smoothies.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E09FF19070A170024C55A /* smoothies.png */; };
+		0B0E0A0E19070A180024C55A /* coffeeprotein.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0119070A170024C55A /* coffeeprotein.png */; };
+		0B0E0A0F19070A180024C55A /* lemonade.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0219070A170024C55A /* lemonade.png */; };
+		0B0E0A1019070A180024C55A /* seabreeze.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0319070A170024C55A /* seabreeze.png */; };
+		0B0E0A1119070A180024C55A /* sexonthebeach.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0419070A180024C55A /* sexonthebeach.png */; };
+		0B0E0A1219070A180024C55A /* facebook-login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0519070A180024C55A /* facebook-login.png */; };
+		0B0E0A1319070A180024C55A /* login-picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0619070A180024C55A /* login-picture.png */; };
+		0B0E0A1419070A180024C55A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0719070A180024C55A /* logo.png */; };
+		0B0E0A1519070A180024C55A /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0819070A180024C55A /* profile.png */; };
+		0B0E0A1619070A180024C55A /* twitter-login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B0E0A0919070A180024C55A /* twitter-login.png */; };
+		0BED069F18F236D600E04A6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BED069E18F236D600E04A6C /* Foundation.framework */; };
+		0BED06A118F236D600E04A6C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BED06A018F236D600E04A6C /* CoreGraphics.framework */; };
+		0BED06A318F236D600E04A6C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BED06A218F236D600E04A6C /* UIKit.framework */; };
+		0BED06A918F236D600E04A6C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BED06A718F236D600E04A6C /* InfoPlist.strings */; };
+		0BED06AB18F236D600E04A6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BED06AA18F236D600E04A6C /* main.m */; };
+		0BED06AF18F236D600E04A6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BED06AE18F236D600E04A6C /* AppDelegate.m */; };
+		0BED06B118F236D600E04A6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BED06B018F236D600E04A6C /* Images.xcassets */; };
+		0BED06B818F236D600E04A6C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BED06B718F236D600E04A6C /* XCTest.framework */; };
+		0BED06B918F236D600E04A6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BED069E18F236D600E04A6C /* Foundation.framework */; };
+		0BED06BA18F236D600E04A6C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BED06A218F236D600E04A6C /* UIKit.framework */; };
+		0BED06C218F236D600E04A6C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BED06C018F236D600E04A6C /* InfoPlist.strings */; };
+		0BED06C418F236D600E04A6C /* Drink_MixerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BED06C318F236D600E04A6C /* Drink_MixerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0BED06BB18F236D600E04A6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BED069318F236D600E04A6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0BED069A18F236D600E04A6C;
+			remoteInfo = "Drink Mixer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B0E09E6190703B20024C55A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		0B0E09E7190703B20024C55A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		0B0E09E9190704210024C55A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Development/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		0B0E09EB190704820024C55A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = ../HomeViewController.h; sourceTree = "<group>"; };
+		0B0E09EC190704820024C55A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = ../HomeViewController.m; sourceTree = "<group>"; };
+		0B0E09EE1907064B0024C55A /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = ../../../Development/Firebase.framework; sourceTree = "<group>"; };
+		0B0E09F01907091D0024C55A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0B0E09F21907096B0024C55A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		0B0E09F4190709B60024C55A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0B0E09F6190709C40024C55A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		0B0E09F8190709DD0024C55A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		0B0E09FC19070A170024C55A /* cocktails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cocktails.png; sourceTree = "<group>"; };
+		0B0E09FD19070A170024C55A /* other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = other.png; sourceTree = "<group>"; };
+		0B0E09FE19070A170024C55A /* protein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = protein.png; sourceTree = "<group>"; };
+		0B0E09FF19070A170024C55A /* smoothies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoothies.png; sourceTree = "<group>"; };
+		0B0E0A0119070A170024C55A /* coffeeprotein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffeeprotein.png; sourceTree = "<group>"; };
+		0B0E0A0219070A170024C55A /* lemonade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lemonade.png; sourceTree = "<group>"; };
+		0B0E0A0319070A170024C55A /* seabreeze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seabreeze.png; sourceTree = "<group>"; };
+		0B0E0A0419070A180024C55A /* sexonthebeach.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sexonthebeach.png; sourceTree = "<group>"; };
+		0B0E0A0519070A180024C55A /* facebook-login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login.png"; sourceTree = "<group>"; };
+		0B0E0A0619070A180024C55A /* login-picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-picture.png"; sourceTree = "<group>"; };
+		0B0E0A0719070A180024C55A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		0B0E0A0819070A180024C55A /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
+		0B0E0A0919070A180024C55A /* twitter-login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-login.png"; sourceTree = "<group>"; };
+		0BED069B18F236D600E04A6C /* Drink Mixer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drink Mixer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BED069E18F236D600E04A6C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0BED06A018F236D600E04A6C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0BED06A218F236D600E04A6C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0BED06A618F236D600E04A6C /* Drink Mixer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Drink Mixer-Info.plist"; sourceTree = "<group>"; };
+		0BED06A818F236D600E04A6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0BED06AA18F236D600E04A6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0BED06AC18F236D600E04A6C /* Drink Mixer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Drink Mixer-Prefix.pch"; sourceTree = "<group>"; };
+		0BED06AD18F236D600E04A6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0BED06AE18F236D600E04A6C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0BED06B018F236D600E04A6C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0BED06B618F236D600E04A6C /* Drink MixerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Drink MixerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BED06B718F236D600E04A6C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		0BED06BF18F236D600E04A6C /* Drink MixerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Drink MixerTests-Info.plist"; sourceTree = "<group>"; };
+		0BED06C118F236D600E04A6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0BED06C318F236D600E04A6C /* Drink_MixerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Drink_MixerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0BED069818F236D600E04A6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B0E09F9190709DD0024C55A /* libicucore.dylib in Frameworks */,
+				0B0E09F31907096B0024C55A /* libc++.dylib in Frameworks */,
+				0B0E09F11907091D0024C55A /* SystemConfiguration.framework in Frameworks */,
+				0B0E09EF1907064B0024C55A /* Firebase.framework in Frameworks */,
+				0B0E09EA190704210024C55A /* FacebookSDK.framework in Frameworks */,
+				0BED06A118F236D600E04A6C /* CoreGraphics.framework in Frameworks */,
+				0BED06A318F236D600E04A6C /* UIKit.framework in Frameworks */,
+				0BED069F18F236D600E04A6C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0BED06B318F236D600E04A6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BED06B818F236D600E04A6C /* XCTest.framework in Frameworks */,
+				0BED06BA18F236D600E04A6C /* UIKit.framework in Frameworks */,
+				0BED06B918F236D600E04A6C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B0E09FA19070A170024C55A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				0B0E09FB19070A170024C55A /* categories */,
+				0B0E0A0019070A170024C55A /* drinks */,
+				0B0E0A0519070A180024C55A /* facebook-login.png */,
+				0B0E0A0619070A180024C55A /* login-picture.png */,
+				0B0E0A0719070A180024C55A /* logo.png */,
+				0B0E0A0819070A180024C55A /* profile.png */,
+				0B0E0A0919070A180024C55A /* twitter-login.png */,
+			);
+			path = images;
+			sourceTree = SOURCE_ROOT;
+		};
+		0B0E09FB19070A170024C55A /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				0B0E09FC19070A170024C55A /* cocktails.png */,
+				0B0E09FD19070A170024C55A /* other.png */,
+				0B0E09FE19070A170024C55A /* protein.png */,
+				0B0E09FF19070A170024C55A /* smoothies.png */,
+			);
+			path = categories;
+			sourceTree = "<group>";
+		};
+		0B0E0A0019070A170024C55A /* drinks */ = {
+			isa = PBXGroup;
+			children = (
+				0B0E0A0119070A170024C55A /* coffeeprotein.png */,
+				0B0E0A0219070A170024C55A /* lemonade.png */,
+				0B0E0A0319070A170024C55A /* seabreeze.png */,
+				0B0E0A0419070A180024C55A /* sexonthebeach.png */,
+			);
+			path = drinks;
+			sourceTree = "<group>";
+		};
+		0BED069218F236D600E04A6C = {
+			isa = PBXGroup;
+			children = (
+				0BED06A418F236D600E04A6C /* Drink Mixer */,
+				0BED06BD18F236D600E04A6C /* Drink MixerTests */,
+				0BED069D18F236D600E04A6C /* Frameworks */,
+				0BED069C18F236D600E04A6C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0BED069C18F236D600E04A6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0BED069B18F236D600E04A6C /* Drink Mixer.app */,
+				0BED06B618F236D600E04A6C /* Drink MixerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0BED069D18F236D600E04A6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B0E09F8190709DD0024C55A /* libicucore.dylib */,
+				0B0E09F6190709C40024C55A /* CFNetwork.framework */,
+				0B0E09F4190709B60024C55A /* Security.framework */,
+				0B0E09F21907096B0024C55A /* libc++.dylib */,
+				0B0E09F01907091D0024C55A /* SystemConfiguration.framework */,
+				0B0E09EE1907064B0024C55A /* Firebase.framework */,
+				0B0E09E9190704210024C55A /* FacebookSDK.framework */,
+				0BED069E18F236D600E04A6C /* Foundation.framework */,
+				0BED06A018F236D600E04A6C /* CoreGraphics.framework */,
+				0BED06A218F236D600E04A6C /* UIKit.framework */,
+				0BED06B718F236D600E04A6C /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0BED06A418F236D600E04A6C /* Drink Mixer */ = {
+			isa = PBXGroup;
+			children = (
+				0B0E09EB190704820024C55A /* HomeViewController.h */,
+				0B0E09EC190704820024C55A /* HomeViewController.m */,
+				0BED06AD18F236D600E04A6C /* AppDelegate.h */,
+				0BED06AE18F236D600E04A6C /* AppDelegate.m */,
+				0BED06B018F236D600E04A6C /* Images.xcassets */,
+				0B0E09E6190703B20024C55A /* LoginViewController.h */,
+				0B0E09E7190703B20024C55A /* LoginViewController.m */,
+				0B0E09FA19070A170024C55A /* images */,
+				0BED06A518F236D600E04A6C /* Supporting Files */,
+			);
+			path = "Drink Mixer";
+			sourceTree = "<group>";
+		};
+		0BED06A518F236D600E04A6C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0BED06A618F236D600E04A6C /* Drink Mixer-Info.plist */,
+				0BED06A718F236D600E04A6C /* InfoPlist.strings */,
+				0BED06AA18F236D600E04A6C /* main.m */,
+				0BED06AC18F236D600E04A6C /* Drink Mixer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0BED06BD18F236D600E04A6C /* Drink MixerTests */ = {
+			isa = PBXGroup;
+			children = (
+				0BED06C318F236D600E04A6C /* Drink_MixerTests.m */,
+				0BED06BE18F236D600E04A6C /* Supporting Files */,
+			);
+			path = "Drink MixerTests";
+			sourceTree = "<group>";
+		};
+		0BED06BE18F236D600E04A6C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0BED06BF18F236D600E04A6C /* Drink MixerTests-Info.plist */,
+				0BED06C018F236D600E04A6C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0BED069A18F236D600E04A6C /* Drink Mixer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0BED06C718F236D600E04A6C /* Build configuration list for PBXNativeTarget "Drink Mixer" */;
+			buildPhases = (
+				0BED069718F236D600E04A6C /* Sources */,
+				0BED069818F236D600E04A6C /* Frameworks */,
+				0BED069918F236D600E04A6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Drink Mixer";
+			productName = "Drink Mixer";
+			productReference = 0BED069B18F236D600E04A6C /* Drink Mixer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0BED06B518F236D600E04A6C /* Drink MixerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0BED06CA18F236D600E04A6C /* Build configuration list for PBXNativeTarget "Drink MixerTests" */;
+			buildPhases = (
+				0BED06B218F236D600E04A6C /* Sources */,
+				0BED06B318F236D600E04A6C /* Frameworks */,
+				0BED06B418F236D600E04A6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0BED06BC18F236D600E04A6C /* PBXTargetDependency */,
+			);
+			name = "Drink MixerTests";
+			productName = "Drink MixerTests";
+			productReference = 0BED06B618F236D600E04A6C /* Drink MixerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0BED069318F236D600E04A6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Angela Zhang";
+				TargetAttributes = {
+					0BED06B518F236D600E04A6C = {
+						TestTargetID = 0BED069A18F236D600E04A6C;
+					};
+				};
+			};
+			buildConfigurationList = 0BED069618F236D600E04A6C /* Build configuration list for PBXProject "Drink Mixer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0BED069218F236D600E04A6C;
+			productRefGroup = 0BED069C18F236D600E04A6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0BED069A18F236D600E04A6C /* Drink Mixer */,
+				0BED06B518F236D600E04A6C /* Drink MixerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0BED069918F236D600E04A6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B0E0A1419070A180024C55A /* logo.png in Resources */,
+				0BED06A918F236D600E04A6C /* InfoPlist.strings in Resources */,
+				0B0E0A0D19070A180024C55A /* smoothies.png in Resources */,
+				0BED06B118F236D600E04A6C /* Images.xcassets in Resources */,
+				0B0E0A1119070A180024C55A /* sexonthebeach.png in Resources */,
+				0B0E0A0B19070A180024C55A /* other.png in Resources */,
+				0B0E0A0F19070A180024C55A /* lemonade.png in Resources */,
+				0B0E0A0A19070A180024C55A /* cocktails.png in Resources */,
+				0B0E0A1219070A180024C55A /* facebook-login.png in Resources */,
+				0B0E0A0C19070A180024C55A /* protein.png in Resources */,
+				0B0E0A0E19070A180024C55A /* coffeeprotein.png in Resources */,
+				0B0E0A1619070A180024C55A /* twitter-login.png in Resources */,
+				0B0E0A1319070A180024C55A /* login-picture.png in Resources */,
+				0B0E0A1019070A180024C55A /* seabreeze.png in Resources */,
+				0B0E0A1519070A180024C55A /* profile.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0BED06B418F236D600E04A6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BED06C218F236D600E04A6C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0BED069718F236D600E04A6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BED06AF18F236D600E04A6C /* AppDelegate.m in Sources */,
+				0BED06AB18F236D600E04A6C /* main.m in Sources */,
+				0B0E09E8190703B20024C55A /* LoginViewController.m in Sources */,
+				0B0E09ED190704820024C55A /* HomeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0BED06B218F236D600E04A6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BED06C418F236D600E04A6C /* Drink_MixerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0BED06BC18F236D600E04A6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0BED069A18F236D600E04A6C /* Drink Mixer */;
+			targetProxy = 0BED06BB18F236D600E04A6C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0BED06A718F236D600E04A6C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0BED06A818F236D600E04A6C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0BED06C018F236D600E04A6C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0BED06C118F236D600E04A6C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0BED06C518F236D600E04A6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0BED06C618F236D600E04A6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0BED06C818F236D600E04A6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Angela/Documents/Development/FacebookSDK,
+					/Users/Angela/Documents/Development,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Drink Mixer/Drink Mixer-Prefix.pch";
+				INFOPLIST_FILE = "Drink Mixer/Drink Mixer-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0BED06C918F236D600E04A6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Angela/Documents/Development/FacebookSDK,
+					/Users/Angela/Documents/Development,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Drink Mixer/Drink Mixer-Prefix.pch";
+				INFOPLIST_FILE = "Drink Mixer/Drink Mixer-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				"OTHER_LDFLAGS[arch=*]" = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0BED06CB18F236D600E04A6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Drink Mixer.app/Drink Mixer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Drink Mixer/Drink Mixer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Drink MixerTests/Drink MixerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		0BED06CC18F236D600E04A6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Drink Mixer.app/Drink Mixer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Drink Mixer/Drink Mixer-Prefix.pch";
+				INFOPLIST_FILE = "Drink MixerTests/Drink MixerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0BED069618F236D600E04A6C /* Build configuration list for PBXProject "Drink Mixer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BED06C518F236D600E04A6C /* Debug */,
+				0BED06C618F236D600E04A6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0BED06C718F236D600E04A6C /* Build configuration list for PBXNativeTarget "Drink Mixer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BED06C818F236D600E04A6C /* Debug */,
+				0BED06C918F236D600E04A6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0BED06CA18F236D600E04A6C /* Build configuration list for PBXNativeTarget "Drink MixerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BED06CB18F236D600E04A6C /* Debug */,
+				0BED06CC18F236D600E04A6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0BED069318F236D600E04A6C /* Project object */;
+}
