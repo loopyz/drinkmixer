@@ -48,12 +48,14 @@
                                           // Handler for session state changes
                                           // This method will be called EACH time the session state changes,
                                           // also for intermediate states and NOT just when the session open
-                                          [self sessionStateChanged:session state:state error:error];
+                                          //[self sessionStateChanged:session state:state error:error];
+                                          [self.navigationController popToRootViewControllerAnimated:YES];
                                       }];
     } else {
         //UIButton *loginButton = [self.loginViewController loginButton];
         //[loginButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
-        [homeViewController presentViewController:loginViewController animated:YES completion:NULL];
+        //[homeViewController presentViewController:loginViewController animated:YES completion:NULL];
+        [self.navigationController presentViewController:loginViewController animated:YES completion:NULL];
     }
     
     return YES;

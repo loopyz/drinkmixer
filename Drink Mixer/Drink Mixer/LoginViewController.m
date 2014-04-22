@@ -1,18 +1,17 @@
 //
 //  LoginViewController.m
-//  Drink Mixer
+//  uStudy
 //
-//  Created by Angela Zhang on 4/22/14.
+//  Created by Angela Zhang on 1/31/14.
 //  Copyright (c) 2014 Angela Zhang. All rights reserved.
 //
 
-#import <FacebookSDK/FacebookSDK.h>
-
 #import "LoginViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
 
 @interface LoginViewController ()
-- (IBAction)buttonTouched:(id)sender;
+
 @end
 
 @implementation LoginViewController
@@ -53,8 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	// Do any additional setup after loading the view.
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 274)/2, 150, 274, 81)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 230)/2, 150, 229.167, 110)];
     imgView.image = [UIImage imageNamed:@"logo.png"];
     [self.view addSubview:imgView];
     
@@ -65,7 +65,7 @@
     self.loginButton.frame = CGRectMake((self.view.frame.size.width - 263)/2, 300, 263, 52);
     [self.loginButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImage *btnImage = [UIImage imageNamed:@"facebook-login.png"];
+    UIImage *btnImage = [UIImage imageNamed:@"facebook.png"];
     [self.loginButton setImage:btnImage forState:UIControlStateNormal];
     self.loginButton.contentMode = UIViewContentModeScaleToFill;
     
