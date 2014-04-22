@@ -21,6 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self addBackgroundImage];
     }
     return self;
 }
@@ -54,22 +55,52 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 230)/2, 150, 229.167, 110)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 230)/2 - 13, 80, 258.5, 62)];
     imgView.image = [UIImage imageNamed:@"logo.png"];
     [self.view addSubview:imgView];
     
 	// Do any additional setup after loading the view.
-    self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.loginButton setTitle:@"Show View" forState:UIControlStateNormal];
+    self.facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.facebookButton setTitle:@"Show View" forState:UIControlStateNormal];
     
-    self.loginButton.frame = CGRectMake((self.view.frame.size.width - 263)/2, 300, 263, 52);
-    [self.loginButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    self.facebookButton.frame = CGRectMake((self.view.frame.size.width - 263)/2 + 3, 190, 263, 52);
+    [self.facebookButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImage *btnImage = [UIImage imageNamed:@"facebook.png"];
-    [self.loginButton setImage:btnImage forState:UIControlStateNormal];
-    self.loginButton.contentMode = UIViewContentModeScaleToFill;
+    UIImage *btnImage = [UIImage imageNamed:@"facebook-login.png"];
+    [self.facebookButton setImage:btnImage forState:UIControlStateNormal];
+    self.facebookButton.contentMode = UIViewContentModeScaleToFill;
+
+    [self.view addSubview:self.facebookButton];
     
-    [self.view addSubview:self.loginButton];
+    self.twitterButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.twitterButton setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    self.twitterButton.frame = CGRectMake((self.view.frame.size.width - 263)/2 + 3, 250, 263, 52);
+    [self.twitterButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"twitter-login.png"];
+    [self.twitterButton setImage:btnImage forState:UIControlStateNormal];
+    self.twitterButton.contentMode = UIViewContentModeScaleToFill;
+    
+    
+//    UIImageView *bottompic = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 230)/2 - 13, 400, 423, 214)];
+//    bottompic.image =  [UIImage imageNamed:@"login-picture.png"];
+//    [self.view addSubview:bottompic];
+    
+    
+    [self.view addSubview:self.twitterButton];
+    
+    
+}
+
+- (void)addBackgroundImage
+{
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"bg.png"] drawInRect:self.view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
 }
 
 - (void)didReceiveMemoryWarning

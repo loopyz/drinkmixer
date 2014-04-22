@@ -168,7 +168,7 @@
 - (void)userLoggedOut
 {
     // Set the button title as "Log in with Facebook"
-    UIButton *loginButton = [self.loginViewController loginButton];
+    UIButton *loginButton = [self.loginViewController facebookButton];
     [loginButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
     
     // Confirm logout message
@@ -180,7 +180,7 @@
 {
     
     // Set the button title as "Log out"
-    UIButton *loginButton = self.loginViewController.loginButton;
+    UIButton *loginButton = self.loginViewController.facebookButton;
     [loginButton setTitle:@"Log out" forState:UIControlStateNormal];
     
     [[FBRequest requestForMe] startWithCompletionHandler:
