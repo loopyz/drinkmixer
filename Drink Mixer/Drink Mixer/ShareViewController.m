@@ -31,17 +31,22 @@
                                        forBarMetrics: UIBarMetricsDefault];
     
     // Left bar button item. TODO: replace with custom image one
-    UIBarButtonItem *lbb =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"world-disabled.png"]
+    UIImage *world = [UIImage imageNamed:@"world-disabled.png"];
+    
+    UIBarButtonItem *lbb =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tinyworld.png"]
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(launchShare)];
+    lbb.tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     self.navigationItem.leftBarButtonItem = lbb;
     
     // Logo in the center of navigation bar
     UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navlogo.png"]];
-    titleImageView.frame = CGRectMake(30, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
+    titleImageView.frame = CGRectMake(43, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
     [logoView addSubview:titleImageView];
+    
+    titleImageView.alpha = .5;
     
     UIButton *homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     homeButton.frame = CGRectMake(0, 0, 200, 44);
@@ -53,11 +58,14 @@
     self.navigationItem.titleView = logoView;
     
     // Right bar button item to launch the categories selection screen.
-    UIBarButtonItem *rbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cup-disabled.png"]
+    UIBarButtonItem *rbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tinycup.png"]
                                                             style:UIBarButtonItemStylePlain
                                                            target:self
                                                            action:@selector(launchCategories)];
+    
+    rbb.tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:.5];
     self.navigationItem.rightBarButtonItem = rbb;
+
 }
 
 - (void)launchHome
