@@ -23,7 +23,7 @@
         [self setupSearch];
         [self setupButtons];
         
-        self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
+        
     }
     return self;
 }
@@ -187,29 +187,6 @@
 {
     NSLog(@"CATEGORIES");
     [super viewDidLoad];
-
-    CGRect frame = [[UIScreen mainScreen] applicationFrame];
-    
-    Firebase* gamesRef = [self.firebase childByAppendingPath:@"games"];
-    [gamesRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        self.myDrinks = snapshot.value;
-        self.drinkKeys = self.myDrinks.allKeys;
-        [_collectionView reloadData];
-    }];
-    
-    UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc] init];
-    layout.minimumInteritemSpacing = 0;
-    layout.minimumLineSpacing = 20;
-    layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20); //  Top, left, bottom, right
-    
-    _collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, frame.size.height-100, frame.size.width)  collectionViewLayout:layout];
-    [_collectionView setDataSource:self];
-    [_collectionView setDelegate:self];
-    
-    [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
-    [_collectionView setBackgroundColor:[UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1.0]];
-    
-    [self.view addSubview:_collectionView];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
@@ -238,56 +215,6 @@
     [textField resignFirstResponder];
     //go to next view :P
     return false;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return [self.drinkKeys count];
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier"
-                                                                         forIndexPath:indexPath];
-    
-    NSString* key = [self.drinkKeys objectAtIndex:indexPath.row];
-    NSDictionary* drink = self.myDrinks[key];
-    
-    // TODO: query firebase for actual drink image and use it here
-    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cup.png"]];
-    
-    UILabel *label = (UILabel*)[cell.contentView viewWithTag:1];
-    
-    if (!label) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 280, 280, 25)];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor colorWithRed:46.0/255.0 green:63.0/255.0 blue:81.0/255.0 alpha:1.0];
-        label.tag = 1;
-        [cell.contentView addSubview:label];
-    }
-    
-    label.text = self.myDrinks[[self.drinkKeys objectAtIndex:indexPath.row]][@"name"];
-    
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    NSString* key = [self.drinkKeys objectAtIndex:indexPath.row];
-    NSDictionary* drink = self.myDrinks[key];
-    
-    // TODO: launch new screen for displaying how to mix the given drink
-    
-    [collectionView reloadData];
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    return CGSizeMake(screenWidth/2 - 100, screenHeight/4);
 }
 
 @end

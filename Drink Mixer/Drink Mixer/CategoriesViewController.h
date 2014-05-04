@@ -7,23 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Firebase/Firebase.h>
 
-#define firebaseURL @"https://something.firebaseio.com/" //TODO: change this to real thing!
-
-@interface CategoriesViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-{
-    UICollectionView *_collectionView;
-}
+@interface CategoriesViewController : UIViewController 
 
 @property (strong, nonatomic) IBOutlet UIButton *cocktailsButton;
 @property (strong, nonatomic) IBOutlet UIButton *smoothiesButton;
 @property (strong, nonatomic) IBOutlet UIButton *proteinButton;
 @property (strong, nonatomic) IBOutlet UIButton *otherButton;
 
-@property (nonatomic, strong) Firebase *firebase;
-@property (nonatomic, strong) NSDictionary *myDrinks;
-@property (nonatomic, strong) NSArray *drinkKeys;
+
 
 
 @end
