@@ -8,9 +8,14 @@
 
 #import "ShareViewController.h"
 #import "CategoriesViewController.h"
+#import <MobileCoreServices/UTCoreTypes.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface ShareViewController ()
-
+{
+    BOOL mediaPicked;
+    UIImage *img;
+}
 @end
 
 @implementation ShareViewController
@@ -20,8 +25,26 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self initializeNavBar];
+        self.imagePicker = [[UIImagePickerController alloc] init];
+        self.imagePicker.delegate = self;
+        
+        [self initializeCameraButton];
     }
     return self;
+}
+
+- (void)initializeCameraButton
+{
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    
+    UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *cameraButtonImage = [UIImage imageNamed:@"cup-disabled"]; // TODO: change to image of camera
+    [cameraButton setBackgroundImage:cameraButtonImage forState:UIControlStateNormal];
+    int buttonWidth = 100;
+    cameraButton.frame = CGRectMake(screenWidth/2-buttonWidth/2, 50, buttonWidth, 100);
+    [cameraButton addTarget:self action:@selector(choosePicture:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cameraButton];
 }
 
 - (void)initializeNavBar
@@ -76,6 +99,71 @@
     [self.navigationController pushViewController:cvc animated:NO];
 }
 
+- (void) choosePicture: (id) sender
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self.imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        NSArray* mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+        self.imagePicker.mediaTypes = mediaTypes;
+        [self.imagePicker setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    } else {
+        [self.imagePicker setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    }
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    mediaPicked = NO;
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    UIImage *image;
+    NSData *mediaData;
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *) kUTTypeImage]) {
+        image = [info valueForKey:UIImagePickerControllerOriginalImage];
+        mediaData = UIImageJPEGRepresentation(image, 1.0f);
+    } else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
+        NSURL *vidURL = [info valueForKey:UIImagePickerControllerMediaURL];
+        mediaData = [NSData dataWithContentsOfURL:vidURL];
+        MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:vidURL];
+        image = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+        player = nil;
+    }
+    
+    img = [UIImage imageWithData:mediaData];
+    mediaPicked = YES;
+    
+    // TODO: test this since I'm not sure it works (simulator has no camera)
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 100, 50)];
+    [imgView setImage:img];
+    [self.view addSubview:imgView];
+}
+
+- (UIImage *)getThumbnailFromImage:(UIImage *)image {
+    CGRect newRect = CGRectIntegral(CGRectMake(0, 0, 20, 20));
+    CGImageRef imageRef = image.CGImage;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(20.0f, 20.0f), NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, 20.0f);
+    CGContextConcatCTM(context, flipVertical);
+    // Draw into the context; this scales the image
+    CGContextDrawImage(context, newRect, imageRef);
+    CGImageRef newImageRef = CGBitmapContextCreateImage(context);
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+    
+    CGImageRelease(newImageRef);
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 - (void)viewDidLoad
 {
     NSLog(@"SHARE");
@@ -88,16 +176,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
