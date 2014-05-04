@@ -18,20 +18,44 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-
-        UIBarButtonItem *lbb = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleDone target:self action:@selector(doSomething)];
-        self.navigationItem.leftBarButtonItem = lbb;
-
-        // Custom initialization
+        [self initializeNavBar];
+        
         [self addBackgroundImage];
 
     }
     return self;
 }
 
+- (void)initializeNavBar
+{
+    // Background image for navbar
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"]
+                                       forBarMetrics: UIBarMetricsDefault];
+    
+    // Left bar button item. TODO: replace with custom image one
+    UIBarButtonItem *lbb = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doSomething)];
+    self.navigationItem.leftBarButtonItem = lbb;
+    
+    // Logo in the center of navigation bar
+    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navlogo.png"]];
+    titleImageView.frame = CGRectMake(40, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
+    [logoView addSubview:titleImageView];
+    self.navigationItem.titleView = logoView;
+    
+    // Right bar button item. TODO: replace with custom image one
+    UIBarButtonItem *rbb = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(doSomethingElse)];
+    self.navigationItem.rightBarButtonItem = rbb;
+}
+
 - (void)doSomething //TODO: change this!
 {
     NSLog(@"left bar button item clicked");
+}
+
+- (void)doSomethingElse //TODO: change this!
+{
+    NSLog(@"right bar buttom item clicked");
 }
 
 - (void)viewDidLoad
