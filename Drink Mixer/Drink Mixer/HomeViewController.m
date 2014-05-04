@@ -18,9 +18,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        UIBarButtonItem *lbb = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleDone target:self action:@selector(doSomething)];
+        self.navigationItem.leftBarButtonItem = lbb;
     }
     return self;
+}
+
+- (void)doSomething //TODO: change this!
+{
+    NSLog(@"left bar button item clicked");
 }
 
 - (void)viewDidLoad
