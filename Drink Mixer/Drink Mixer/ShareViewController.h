@@ -11,5 +11,8 @@
 @interface ShareViewController : UIViewController
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (strong, nonatomic) UITextField *nameField;
+@property (strong, nonatomic) UITextField *descriptionField;
+
 
 @end

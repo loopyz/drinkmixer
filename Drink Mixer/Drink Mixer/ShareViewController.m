@@ -11,7 +11,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface ShareViewController ()
+@interface ShareViewController ()  <UITextFieldDelegate>
 {
     BOOL mediaPicked;
     UIImage *img;
@@ -19,6 +19,8 @@
 @end
 
 @implementation ShareViewController
+@synthesize nameField, descriptionField;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +31,29 @@
         self.imagePicker.delegate = self;
         
         [self initializeCameraButton];
+        
+        //initialize text field?
+        self.nameField = [[UITextField alloc] init];
+        self.descriptionField = [[UITextField alloc] init];
+        
+        //set up fields?
+        self.nameField.frame = CGRectMake(120,250,180,30);
+        self.nameField.backgroundColor = [UIColor whiteColor];
+        self.nameField.textColor = [UIColor blackColor];
+        [self.nameField setAlpha:0.8];
+        
+        //make location text field pretty
+        self.nameField.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.nameField.keyboardType = UIKeyboardTypeDefault;
+        self.nameField.returnKeyType = UIReturnKeyDone;
+        self.nameField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        self.nameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        self.nameField.borderStyle = UITextBorderStyleNone;
+        //[self.locationTextField setBackground:textBG];
+        self.nameField.delegate = self;
+        
+        [self.view addSubview:self.nameField];
+
     }
     return self;
 }
@@ -39,10 +64,10 @@
     CGFloat screenWidth = screenRect.size.width;
     
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *cameraButtonImage = [UIImage imageNamed:@"cup-disabled"]; // TODO: change to image of camera
+    UIImage *cameraButtonImage = [UIImage imageNamed:@"addcamera.png"]; // TODO: change to image of camera
     [cameraButton setBackgroundImage:cameraButtonImage forState:UIControlStateNormal];
     int buttonWidth = 100;
-    cameraButton.frame = CGRectMake(screenWidth/2-buttonWidth/2, 50, buttonWidth, 100);
+    cameraButton.frame = CGRectMake(20, 20, buttonWidth * .8, 80);
     [cameraButton addTarget:self action:@selector(choosePicture:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cameraButton];
 }
@@ -184,5 +209,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)didFinishChoosing
+{
+    //    AppDelegate* appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    //    NSString* username = appDelegate.username;
+    //
+    //    Firebase* usersRef = [[Firebase alloc] initWithUrl:@"https://uStudy.firebaseio.com/users"];
+    //    Firebase* interestsRef = [[usersRef childByAppendingPath:username] childByAppendingPath:@"college"];
+    //
+    //
+    [self dismissViewControllerAnimated:YES completion:^() {
+        
+    }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    //go to next view :P
+    return false;
+}
+
+
 
 @end
