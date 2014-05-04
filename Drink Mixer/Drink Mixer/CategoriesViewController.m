@@ -9,7 +9,7 @@
 #import "CategoriesViewController.h"
 #import "ShareViewController.h"
 
-@interface CategoriesViewController ()
+@interface CategoriesViewController () <UITextFieldDelegate>
 
 @end
 
@@ -20,6 +20,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self initializeNavBar];
+        [self setupSearch];
+        [self setupButtons];
     }
     return self;
 }
@@ -60,6 +62,72 @@
     self.navigationItem.rightBarButtonItem = rbb;
 }
 
+- (void)setupSearch
+{
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 326.4, 32.38)];
+    imgView.image = [UIImage imageNamed:@"search.png"];
+    [self.view addSubview:imgView];
+}
+
+- (void)setupButtons
+{
+    
+    //cocktails button
+    self.cocktailsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.cocktailsButton setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    self.cocktailsButton.frame = CGRectMake(0, 32.38, 327, 121.14759);
+    [self.cocktailsButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImage *btnImage = [UIImage imageNamed:@"cocktails.png"];
+    [self.cocktailsButton setImage:btnImage forState:UIControlStateNormal];
+    self.cocktailsButton.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:self.cocktailsButton];
+    
+    //smoothies button
+    self.smoothiesButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.smoothiesButton setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    self.smoothiesButton.frame = CGRectMake(0, 32.38 + 120, 327, 121.14759);
+    [self.smoothiesButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"smoothies.png"];
+    [self.smoothiesButton setImage:btnImage forState:UIControlStateNormal];
+    self.smoothiesButton.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:self.smoothiesButton];
+    
+    //protein button
+    self.proteinButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.proteinButton setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    self.proteinButton.frame = CGRectMake(0, 32.38 + 120 + 120, 327, 121.14759);
+    [self.proteinButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"protein.png"];
+    [self.proteinButton setImage:btnImage forState:UIControlStateNormal];
+    self.proteinButton.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:self.proteinButton];
+    
+    //other button
+    self.otherButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.otherButton setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    self.otherButton.frame = CGRectMake(0, 32.38 + 120 + 120+114, 327, 121.14759);
+    [self.otherButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"other.png"];
+    [self.otherButton setImage:btnImage forState:UIControlStateNormal];
+    self.otherButton.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:self.otherButton];
+    
+    
+    
+}
+
 - (void)launchHome
 {
     [self.navigationController popToRootViewControllerAnimated:NO];
@@ -87,6 +155,26 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)buttonTouched:(id)sender
+{
+    NSLog(@"Meow");
+}
+
+- (void)didFinishChoosing
+{
+
+    [self dismissViewControllerAnimated:YES completion:^() {
+        
+    }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    //go to next view :P
+    return false;
 }
 
 /*

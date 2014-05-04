@@ -10,4 +10,12 @@
 
 @interface CategoriesViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *cocktailsButton;
+@property (strong, nonatomic) IBOutlet UIButton *smoothiesButton;
+@property (strong, nonatomic) IBOutlet UIButton *proteinButton;
+@property (strong, nonatomic) IBOutlet UIButton *otherButton;
+
+
+
+
 @end
