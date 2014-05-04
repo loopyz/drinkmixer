@@ -64,9 +64,37 @@
 
 - (void)setupSearch
 {
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 326.4, 32.38)];
-    imgView.image = [UIImage imageNamed:@"search.png"];
-    [self.view addSubview:imgView];
+//    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 326.4, 32.38)];
+//    imgView.image = [UIImage imageNamed:@"search.png"];
+//    [self.view addSubview:imgView];
+    
+    UIImage *textBG = [UIImage imageNamed:@"search"];
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 326.4, 32.38)];
+    
+    textField.borderStyle = UITextBorderStyleRoundedRect;
+    textField.font = [UIFont systemFontOfSize:15];
+    textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"search for a drink" attributes:@{NSForegroundColorAttributeName: [UIColor grayColor]}];
+    textField.textColor = [UIColor grayColor];
+    
+    
+    
+    //set padding
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+    textField.leftView = paddingView;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    
+    
+    textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.keyboardType = UIKeyboardTypeDefault;
+    textField.returnKeyType = UIReturnKeyDone;
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    textField.borderStyle = UITextBorderStyleNone;
+    [textField setBackground:textBG];
+    textField.delegate = self;
+    [self.view addSubview:textField];
+
+
 }
 
 - (void)setupButtons
