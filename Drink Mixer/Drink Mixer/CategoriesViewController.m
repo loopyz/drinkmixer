@@ -1,29 +1,25 @@
 //
-//  HomeViewController.m
+//  CategoriesViewController.m
 //  Drink Mixer
 //
-//  Created by Lucy Guo on 4/22/14.
+//  Created by Angela Zhang on 5/4/14.
 //  Copyright (c) 2014 Angela Zhang. All rights reserved.
 //
 
-#import "HomeViewController.h"
 #import "CategoriesViewController.h"
 #import "ShareViewController.h"
 
-@interface HomeViewController ()
+@interface CategoriesViewController ()
 
 @end
 
-@implementation HomeViewController
+@implementation CategoriesViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self initializeNavBar];
-        
-        [self addBackgroundImage];
-
     }
     return self;
 }
@@ -46,6 +42,14 @@
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navlogo.png"]];
     titleImageView.frame = CGRectMake(30, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
     [logoView addSubview:titleImageView];
+    
+    UIButton *homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    homeButton.frame = CGRectMake(0, 0, 200, 44);
+    [homeButton addTarget:self
+                   action:@selector(launchHome)
+         forControlEvents:UIControlEventTouchUpInside];
+    [logoView addSubview:homeButton];
+    
     self.navigationItem.titleView = logoView;
     
     // Right bar button item to launch the categories selection screen.
@@ -56,6 +60,11 @@
     self.navigationItem.rightBarButtonItem = rbb;
 }
 
+- (void)launchHome
+{
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
 - (void)launchShare
 {
     ShareViewController *svc = [[ShareViewController alloc] init];
@@ -64,13 +73,12 @@
 
 - (void)launchCategories
 {
-    CategoriesViewController *cvc = [[CategoriesViewController alloc] init];
-    [self.navigationController pushViewController:cvc animated:NO];
+    // Already in the Categories view; this doesn't do anything.
 }
 
 - (void)viewDidLoad
 {
-    NSLog(@"HOME");
+    NSLog(@"CATEGORIES");
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -79,16 +87,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)addBackgroundImage
-{
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"home-bg.png"] drawInRect:self.view.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
 }
 
 /*
