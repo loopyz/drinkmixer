@@ -118,7 +118,7 @@
         category = @"Juice";
     }
     ListViewController *lvc = [[ListViewController alloc] initWithNibName:category bundle:nil];
-    [self.navigationController pushViewController:lvc animated:NO];
+    [self.navigationController pushViewController:lvc animated:YES];
 }
 
 - (void)initializeNavBar

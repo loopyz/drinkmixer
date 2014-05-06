@@ -31,8 +31,23 @@
         self.drinksDataSource = [[NSMutableArray alloc] initWithObjects:nil];
 
         [self initSidebar];
+        [self initNavbar];
     }
     return self;
+}
+
+- (void)initNavbar
+{
+    // Logo in the center of navigation bar
+    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    // TODO: change image here
+    UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navlogo.png"]];
+    titleImageView.frame = CGRectMake(43, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
+    [logoView addSubview:titleImageView];
+    
+    titleImageView.alpha = .5;
+    
+    self.navigationItem.titleView = logoView;
 }
 
 - (void)initSidebar

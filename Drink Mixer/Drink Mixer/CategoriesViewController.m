@@ -164,8 +164,6 @@
     
     [self.view addSubview:self.otherButton];
     
-    
-    
 }
 
 - (void)launchHome
