@@ -58,13 +58,11 @@
     
     UIView *sidebarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH)];
     
-    sidebarView.backgroundColor = [UIColor whiteColor];
     
     //refreshers icon - CHANGE TO WHATEVER CAT WE ARE ON LATER
     UIImageView *sidebarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshersicon.png"]];
     sidebarImageView.frame = CGRectMake(0, 30, 70.5, 482);
     
-    sidebarImageView.backgroundColor = [UIColor whiteColor];
     [sidebarView addSubview:sidebarImageView];
     
     [self.view addSubview:sidebarView];
