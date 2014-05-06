@@ -82,7 +82,7 @@
     self.drinksTableView.separatorStyle=UITableViewCellSeparatorStyleNone; // Get rid of bars separating sections
     self.drinksTableView.delegate = self;
     self.drinksTableView.dataSource = self;
-    [self.drinksTableView setRowHeight:25];
+    [self.drinksTableView setRowHeight:21.5];
     [self.view addSubview:self.drinksTableView];
 }
 
@@ -104,6 +104,7 @@
     return @""; // Doesn't matter b/c we're using custom viewForHeaderInSection
 }
 
+//Header
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 20)];
@@ -116,12 +117,20 @@
      return view;
 }
 
+//for each cell in table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *MyIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
+        
+        UIView *cellBgView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 191, 20.5)];
+        
+        [cellBgView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bluebutton.png"]]];
+        
+        [cell setBackgroundView:cellBgView];
     }
+    
     cell.textLabel.text = [self.drinksDataSource objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     return cell;
