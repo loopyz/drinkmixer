@@ -25,7 +25,6 @@
         [self addBackgroundImage];
         
         self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
-
     }
     return self;
 }
@@ -36,9 +35,7 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"]
                                        forBarMetrics: UIBarMetricsDefault];
     
-    // Left bar button item. TODO: replace with custom image one
-    UIImage *world = [UIImage imageNamed:@"world-disabled.png"];
-    
+    // Left bar button item.
     UIBarButtonItem *lbb =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tinyworld.png"]
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
@@ -77,17 +74,18 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"HOME");
     [super viewDidLoad];
 
     CGRect frame = [[UIScreen mainScreen] applicationFrame];
     
-    Firebase* gamesRef = [self.firebase childByAppendingPath:@"games"];
-    [gamesRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    Firebase* ref = [self.firebase childByAppendingPath:@"drinks"];
+
+    [ref observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         self.myDrinks = snapshot.value;
         self.drinkKeys = self.myDrinks.allKeys;
         [_collectionView reloadData];
     }];
+    NSLog(@"meep %@", self.myDrinks);
     
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 0;

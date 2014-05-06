@@ -8,6 +8,7 @@
 
 #import "CategoriesViewController.h"
 #import "ShareViewController.h"
+#import "ListViewController.h"
 
 @interface CategoriesViewController () <UITextFieldDelegate>
 
@@ -200,6 +201,9 @@
 - (IBAction)buttonTouched:(id)sender
 {
     NSLog(@"Meow");
+    ListViewController *lvc = [[ListViewController alloc] init];
+    [self.navigationController pushViewController:lvc animated:NO];
+    
 }
 
 - (void)didFinishChoosing

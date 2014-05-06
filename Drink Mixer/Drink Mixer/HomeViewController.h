@@ -10,7 +10,7 @@
 
 #import <Firebase/Firebase.h>
 
-#define firebaseURL @"https://something.firebaseio.com/" //TODO: change this to real thing!
+#define firebaseURL @"https://drinkmixer.firebaseio.com/"
 
 @interface HomeViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
