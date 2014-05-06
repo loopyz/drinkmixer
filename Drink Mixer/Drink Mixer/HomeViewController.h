@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeViewController : UIViewController
+#import <Firebase/Firebase.h>
+
+#define firebaseURL @"https://drinkmixer.firebaseio.com/"
+
+@interface HomeViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+{
+    UICollectionView *_collectionView;
+}
+
+@property (nonatomic, strong) Firebase *firebase;
+@property (nonatomic, strong) NSDictionary *myDrinks;
+@property (nonatomic, strong) NSArray *drinkKeys;
 
 @end

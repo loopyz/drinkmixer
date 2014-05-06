@@ -8,6 +8,7 @@
 
 #import "CategoriesViewController.h"
 #import "ShareViewController.h"
+#import "ListViewController.h"
 
 @interface CategoriesViewController () <UITextFieldDelegate>
 
@@ -22,6 +23,8 @@
         [self initializeNavBar];
         [self setupSearch];
         [self setupButtons];
+        
+        
     }
     return self;
 }
@@ -185,7 +188,8 @@
 {
     NSLog(@"CATEGORIES");
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)didReceiveMemoryWarning
@@ -197,6 +201,9 @@
 - (IBAction)buttonTouched:(id)sender
 {
     NSLog(@"Meow");
+    ListViewController *lvc = [[ListViewController alloc] init];
+    [self.navigationController pushViewController:lvc animated:NO];
+    
 }
 
 - (void)didFinishChoosing
@@ -213,16 +220,5 @@
     //go to next view :P
     return false;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

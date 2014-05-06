@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CategoriesViewController : UIViewController
+@interface CategoriesViewController : UIViewController 
 
 @property (strong, nonatomic) IBOutlet UIButton *cocktailsButton;
 @property (strong, nonatomic) IBOutlet UIButton *smoothiesButton;
