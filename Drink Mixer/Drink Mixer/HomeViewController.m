@@ -10,6 +10,11 @@
 //#import "CategoriesViewController.h"
 #import "CategoryViewController.h"
 #import "ShareViewController.h"
+#import <Firebase/Firebase.h>
+
+
+#define firebaseURL @"https://drinkmixer.firebaseio.com/"
+
 
 @interface HomeViewController ()
 
@@ -25,7 +30,6 @@
         
         [self addBackgroundImage];
         
-        self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
     }
     return self;
 }
@@ -79,14 +83,23 @@
 
     CGRect frame = [[UIScreen mainScreen] applicationFrame];
     
-    Firebase* ref = [self.firebase childByAppendingPath:@"drinks"];
-
-    [ref observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        self.myDrinks = snapshot.value;
-        self.drinkKeys = self.myDrinks.allKeys;
-        [_collectionView reloadData];
+    //initialize firebase
+    self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
+    
+//    [ref observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+//        self.myDrinks = snapshot.value;
+//        self.drinkKeys = self.myDrinks.allKeys;
+//        [_collectionView reloadData];
+//    }];
+    
+    Firebase *ref = [[[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:@"cocktails"] childByAppendingPath:@"Red Rooster"];
+    
+    [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSString* ingredient = snapshot.name;
+        NSLog(ingredient);
     }];
-    NSLog(@"meep %@", self.myDrinks);
+    
+    //NSLog(@"meep %@", self.myDrinks);
     
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 0;
