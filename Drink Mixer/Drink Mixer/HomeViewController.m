@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-//#import "CategoriesViewController.h"
 #import "CategoryViewController.h"
 #import "ShareViewController.h"
 #import <Firebase/Firebase.h>
@@ -86,20 +85,13 @@
     //initialize firebase
     self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
     
-//    [ref observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-//        self.myDrinks = snapshot.value;
-//        self.drinkKeys = self.myDrinks.allKeys;
-//        [_collectionView reloadData];
-//    }];
-    
-    Firebase *ref = [[[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:@"cocktails"] childByAppendingPath:@"Red Rooster"];
+    Firebase *ref = [[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:@"cocktails"];
     
     [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         NSString* ingredient = snapshot.name;
         NSLog(ingredient);
     }];
     
-    //NSLog(@"meep %@", self.myDrinks);
     
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 0;

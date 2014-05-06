@@ -8,6 +8,7 @@
 
 #import "ListViewController.h"
 
+#define firebaseURL @"https://drinkmixer.firebaseio.com/"
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 
@@ -15,34 +16,21 @@
 
 
 @interface ListViewController ()
-
+{
+    NSString *category;
+}
 @end
 
 @implementation ListViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nil bundle:nibBundleOrNil];
+    category = nibNameOrNil;
     if (self) {
-        
-        // Initialize data source TODO: populate with firebase
-        self.drinksDataSource = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4", nil];
-        NSLog(@"self.drinksDataSource intialized as %@", self.drinksDataSource);
-        
-//        CGRect screenRect = [[UIScreen mainScreen] bounds];
-//        CGFloat screenWidth = screenRect.size.width;
-//        CGFloat screenHeight = screenRect.size.height;
-//        
-//        // Add image label for drink category
-//        UIView *categoryLabel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenHeight, screenWidth)];
-//        UIImageView *categoryLabelImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"categoryLabel.png"]];
-//        categoryLabelImage.frame = CGRectMake(SIDEBAR_OFFSET, 0, categoryLabelImage.frame.size.width-SIDEBAR_OFFSET, categoryLabelImage.frame.size.height);
-//        [categoryLabel addSubview:categoryLabelImage];
-//        
-//        [self.view addSubview:categoryLabel];
-        
+        self.drinksDataSource = [[NSMutableArray alloc] initWithObjects:nil];
+
         [self initSidebar];
-        
     }
     return self;
 }
@@ -63,13 +51,24 @@
 {
     [super viewDidLoad];
     
+    //initialize firebase
+    self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
+    
+    Firebase *ref = [[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:category];
+    
+    [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSString* ingredient = snapshot.name;
+        [self.drinksDataSource addObject:ingredient];
+        [self.drinksTableView reloadData];
+    }];
+    
     //  Setup for drinks list tableView
     CGRect tableViewRect = CGRectMake(SIDEBAR_OFFSET, 0, SCREEN_WIDTH-SIDEBAR_OFFSET, SCREEN_HEIGHT);
     self.drinksTableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStylePlain];
     self.drinksTableView.separatorStyle=UITableViewCellSeparatorStyleNone; // Get rid of bars separating sections
     self.drinksTableView.delegate = self;
     self.drinksTableView.dataSource = self;
-    [self.drinksTableView reloadData];
+    [self.drinksTableView setRowHeight:25];
     [self.view addSubview:self.drinksTableView];
 }
 
@@ -102,7 +101,7 @@
     //NSString *string =[list objectAtIndex:section];
     //[label setText:string];
     
-    [label setText:@"TESTING"];
+    [label setText:category];
     [view addSubview:label];
     [view setBackgroundColor:[UIColor whiteColor]];
      return view;
@@ -115,7 +114,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
     }
     cell.textLabel.text = [self.drinksDataSource objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:12];
+    cell.textLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     return cell;
 }
 
