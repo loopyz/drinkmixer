@@ -29,12 +29,10 @@
     category = nibNameOrNil;
     if (self) {
         self.drinksDataSource = [[NSMutableArray alloc] initWithObjects:nil];
-
         [self initSidebar];
         [self initNavbar];
         
         self.view.backgroundColor = [UIColor whiteColor];
-        
     }
     return self;
 }
@@ -56,16 +54,10 @@
 - (void)initSidebar
 {
     // Add sidebar on left of screen
-    
     UIView *sidebarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH)];
-    
-    
-    //refreshers icon - CHANGE TO WHATEVER CAT WE ARE ON LATER
-    UIImageView *sidebarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshersicon.png"]];
+    UIImageView *sidebarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[category stringByAppendingString:@"icon"]]];
     sidebarImageView.frame = CGRectMake(0, 30, 70.5, 482);
-    
     [sidebarView addSubview:sidebarImageView];
-    
     [self.view addSubview:sidebarView];
 }
 
@@ -73,7 +65,7 @@
 {
     [super viewDidLoad];
     
-    //initialize firebase
+    // Initialize Firebase
     self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
     
     Firebase *ref = [[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:category];
@@ -108,7 +100,6 @@
     return [self.drinksDataSource count];
 }
 
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return @""; // Doesn't matter b/c we're using custom viewForHeaderInSection
 }
@@ -118,10 +109,6 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 20)];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 20)];
     [label setFont:[UIFont fontWithName:@"hiragino kaku gothic pro" size:15]];
-    
-    // TODO: replace this with name of type of drink being queried for in firebase
-    //NSString *string =[list objectAtIndex:section];
-    //[label setText:string];
     
     [label setText:category];
     [view addSubview:label];

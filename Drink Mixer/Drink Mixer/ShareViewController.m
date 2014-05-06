@@ -7,7 +7,7 @@
 //
 
 #import "ShareViewController.h"
-#import "CategoriesViewController.h"
+#import "CategoryViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -49,7 +49,6 @@
         self.nameField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.nameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.nameField.borderStyle = UITextBorderStyleNone;
-        //[self.locationTextField setBackground:textBG];
         self.nameField.delegate = self;
         
         [self.view addSubview:self.nameField];
@@ -60,9 +59,6 @@
 
 - (void)initializeCameraButton
 {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *cameraButtonImage = [UIImage imageNamed:@"addcamera.png"]; // TODO: change to image of camera
     [cameraButton setBackgroundImage:cameraButtonImage forState:UIControlStateNormal];
@@ -78,9 +74,7 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"]
                                        forBarMetrics: UIBarMetricsDefault];
     
-    // Left bar button item. TODO: replace with custom image one
-    UIImage *world = [UIImage imageNamed:@"world-disabled.png"];
-    
+    // Left bar button item.
     UIBarButtonItem *lbb =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tinyworld.png"]
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
@@ -128,7 +122,7 @@
 
 - (void)launchCategories
 {
-    CategoriesViewController *cvc = [[CategoriesViewController alloc] init];
+    CategoryViewController *cvc = [[CategoryViewController alloc] init];
     [self.navigationController pushViewController:cvc animated:NO];
 }
 
@@ -212,13 +206,6 @@
 
 - (void)didFinishChoosing
 {
-    //    AppDelegate* appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    //    NSString* username = appDelegate.username;
-    //
-    //    Firebase* usersRef = [[Firebase alloc] initWithUrl:@"https://uStudy.firebaseio.com/users"];
-    //    Firebase* interestsRef = [[usersRef childByAppendingPath:username] childByAppendingPath:@"college"];
-    //
-    //
     [self dismissViewControllerAnimated:YES completion:^() {
         
     }];

@@ -116,17 +116,9 @@
 
 - (void)addBackgroundImage
 {
-//    UIGraphicsBeginImageContext(self.view.frame.size);
-//    [[UIImage imageNamed:@"home-bg.png"] drawInRect:self.view.bounds];
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//
-    
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 326.4, 120.36)];
     imgView.image = [UIImage imageNamed:@"profile.png"];
     [self.view addSubview:imgView];
-
-//    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
