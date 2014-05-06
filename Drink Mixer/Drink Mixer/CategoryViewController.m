@@ -52,7 +52,7 @@
 - (void)addCatButtons
 {
     
-    //cocktails button
+    //refreshers button
     self.refreshersButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.refreshersButton setTitle:@"Show View" forState:UIControlStateNormal];
     
@@ -64,6 +64,45 @@
     self.refreshersButton.contentMode = UIViewContentModeScaleToFill;
     
     [self.view addSubview:self.refreshersButton];
+    
+    //coffee button
+    self.coffeeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.coffeeButton setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    self.coffeeButton.frame = CGRectMake(80, 15 + 115, 219.5, 20.5);
+    [self.coffeeButton addTarget:self action:@selector(launchListView) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"coffee.png"];
+    [self.coffeeButton setImage:btnImage forState:UIControlStateNormal];
+    self.coffeeButton.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:self.coffeeButton];
+    
+    //juice button
+    self.juiceButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.juiceButton setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    self.juiceButton.frame = CGRectMake(80, 130 + 115, 219.5, 20.5);
+    [self.juiceButton addTarget:self action:@selector(launchListView) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"juice.png"];
+    [self.juiceButton setImage:btnImage forState:UIControlStateNormal];
+    self.juiceButton.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:self.juiceButton];
+    
+    //shakes button
+    self.shakesButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.shakesButton setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    self.shakesButton.frame = CGRectMake(80, 130 + 115 + 130, 219.5, 20.5);
+    [self.shakesButton addTarget:self action:@selector(launchListView) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"shakes.png"];
+    [self.shakesButton setImage:btnImage forState:UIControlStateNormal];
+    self.shakesButton.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:self.shakesButton];
     
     
 }
