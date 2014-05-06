@@ -57,7 +57,7 @@
     [self.refreshersButton setTitle:@"Show View" forState:UIControlStateNormal];
     
     self.refreshersButton.frame = CGRectMake(80, 15, 219.5, 20.5);
-    [self.refreshersButton addTarget:self action:@selector(launchListView) forControlEvents:UIControlEventTouchUpInside];
+    [self.refreshersButton addTarget:self action:@selector(launchListView:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *btnImage = [UIImage imageNamed:@"refreshers.png"];
     [self.refreshersButton setImage:btnImage forState:UIControlStateNormal];
@@ -70,7 +70,7 @@
     [self.coffeeButton setTitle:@"Show View" forState:UIControlStateNormal];
     
     self.coffeeButton.frame = CGRectMake(80, 15 + 115, 219.5, 20.5);
-    [self.coffeeButton addTarget:self action:@selector(launchListView) forControlEvents:UIControlEventTouchUpInside];
+    [self.coffeeButton addTarget:self action:@selector(launchListView:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"coffee.png"];
     [self.coffeeButton setImage:btnImage forState:UIControlStateNormal];
@@ -83,7 +83,7 @@
     [self.juiceButton setTitle:@"Show View" forState:UIControlStateNormal];
     
     self.juiceButton.frame = CGRectMake(80, 130 + 115, 219.5, 20.5);
-    [self.juiceButton addTarget:self action:@selector(launchListView) forControlEvents:UIControlEventTouchUpInside];
+    [self.juiceButton addTarget:self action:@selector(launchListView:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"juice.png"];
     [self.juiceButton setImage:btnImage forState:UIControlStateNormal];
@@ -96,7 +96,7 @@
     [self.shakesButton setTitle:@"Show View" forState:UIControlStateNormal];
     
     self.shakesButton.frame = CGRectMake(80, 130 + 115 + 130, 219.5, 20.5);
-    [self.shakesButton addTarget:self action:@selector(launchListView) forControlEvents:UIControlEventTouchUpInside];
+    [self.shakesButton addTarget:self action:@selector(launchListView:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"shakes.png"];
     [self.shakesButton setImage:btnImage forState:UIControlStateNormal];
@@ -107,9 +107,17 @@
     
 }
 
-- (void)launchListView
+- (void)launchListView:(id)sender
 {
-    ListViewController *lvc = [[ListViewController alloc] init];
+    NSString *category = @"Coffee";
+    if (sender == self.shakesButton)    {
+        category = @"Shakes";
+    } else if (sender == self.refreshersButton) {
+        category = @"Refreshers";
+    } else if (sender == self.juiceButton) {
+        category = @"Juice";
+    }
+    ListViewController *lvc = [[ListViewController alloc] initWithNibName:category bundle:nil];
     [self.navigationController pushViewController:lvc animated:NO];
 }
 
@@ -119,9 +127,7 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"]
                                        forBarMetrics: UIBarMetricsDefault];
     
-    // Left bar button item. TODO: replace with custom image one
-    UIImage *world = [UIImage imageNamed:@"world-disabled.png"];
-    
+    // Left bar button item.
     UIBarButtonItem *lbb =  [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tinyworld.png"]
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
@@ -173,17 +179,5 @@
 {
     // Already in the Categories view; this doesn't do anything.
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
