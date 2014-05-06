@@ -8,6 +8,7 @@
 
 #import "CategoryViewController.h"
 #import "ShareViewController.h"
+#import "ListViewController.h"
 
 @interface CategoryViewController ()
 
@@ -56,7 +57,7 @@
     [self.refreshersButton setTitle:@"Show View" forState:UIControlStateNormal];
     
     self.refreshersButton.frame = CGRectMake(80, 15, 219.5, 20.5);
-    [self.refreshersButton addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [self.refreshersButton addTarget:self action:@selector(launchListView) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *btnImage = [UIImage imageNamed:@"refreshers.png"];
     [self.refreshersButton setImage:btnImage forState:UIControlStateNormal];
@@ -65,6 +66,12 @@
     [self.view addSubview:self.refreshersButton];
     
     
+}
+
+- (void)launchListView
+{
+    ListViewController *lvc = [[ListViewController alloc] init];
+    [self.navigationController pushViewController:lvc animated:NO];
 }
 
 - (void)initializeNavBar
