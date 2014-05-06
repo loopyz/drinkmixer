@@ -23,10 +23,27 @@
         [self initializeNavBar];
         [self setupSearch];
         [self setupButtons];
+        [self setupRefreshers];
         
         
     }
     return self;
+}
+
+- (void)setupRefreshers
+{
+    //cocktails button
+    UIButton *refreshers1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [refreshers1 setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    refreshers1.frame = CGRectMake(0, 50, 191, 20.5);
+    [refreshers1 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImage *btnImage = [UIImage imageNamed:@"bluebutton.png"];
+    [refreshers1 setImage:btnImage forState:UIControlStateNormal];
+    refreshers1.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:refreshers1];
 }
 
 - (void)initializeNavBar

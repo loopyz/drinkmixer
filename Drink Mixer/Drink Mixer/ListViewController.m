@@ -32,6 +32,7 @@
 
         [self initSidebar];
         [self initNavbar];
+        
         self.view.backgroundColor = [UIColor whiteColor];
         
     }

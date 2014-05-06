@@ -24,10 +24,53 @@
         [self initializeNavBar];
         [self addSideImage];
         [self addCatButtons];
+        [self setupRefreshers];
         self.view.backgroundColor = [UIColor whiteColor];
 
     }
     return self;
+}
+
+- (void)setupRefreshers
+{
+    //button 1
+    UIButton *refreshers1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [refreshers1 setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    refreshers1.frame = CGRectMake(80, 40, 191, 20.5);
+    [refreshers1 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImage *btnImage = [UIImage imageNamed:@"bluebutton.png"];
+    [refreshers1 setImage:btnImage forState:UIControlStateNormal];
+    refreshers1.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:refreshers1];
+    
+    //button 2
+    UIButton *refreshers2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [refreshers2 setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    refreshers2.frame = CGRectMake(80, 40 + 25, 191, 20.5);
+    [refreshers2 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"bluebutton.png"];
+    [refreshers2 setImage:btnImage forState:UIControlStateNormal];
+    refreshers2.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:refreshers2];
+    
+    //button 3
+    UIButton *refreshers3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [refreshers3 setTitle:@"Show View" forState:UIControlStateNormal];
+    
+    refreshers3.frame = CGRectMake(80, 40 + 25 + 25, 191, 20.5);
+    [refreshers3 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    
+    btnImage = [UIImage imageNamed:@"bluebutton.png"];
+    [refreshers3 setImage:btnImage forState:UIControlStateNormal];
+    refreshers3.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.view addSubview:refreshers3];
 }
 
 - (void)viewDidLoad
