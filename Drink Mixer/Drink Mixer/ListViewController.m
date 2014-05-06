@@ -120,10 +120,6 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 20)];
     [label setFont:[UIFont fontWithName:@"hiragino kaku gothic pro" size:15]];
     
-    // TODO: replace this with name of type of drink being queried for in firebase
-    //NSString *string =[list objectAtIndex:section];
-    //[label setText:string];
-    
     [label setText:category];
     [view addSubview:label];
     [view setBackgroundColor:[UIColor whiteColor]];
