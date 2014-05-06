@@ -14,7 +14,6 @@
 @property (nonatomic, strong) NSMutableArray *drinksDataSource;
 @property (nonatomic, strong) UITableView *drinksTableView;
 
-
 @property (nonatomic, strong) Firebase* firebase;
 @property (nonatomic, strong) NSArray *drinkKeys;
 

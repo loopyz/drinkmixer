@@ -20,12 +20,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
         [self initializeNavBar];
         [self addSideImage];
         [self addCatButtons];
         self.view.backgroundColor = [UIColor whiteColor];
-
     }
     return self;
 }
@@ -103,7 +101,6 @@
     self.shakesButton.contentMode = UIViewContentModeScaleToFill;
     
     [self.view addSubview:self.shakesButton];
-    
     
 }
 

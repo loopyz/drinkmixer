@@ -14,5 +14,4 @@
 @property (strong, nonatomic) UITextField *nameField;
 @property (strong, nonatomic) UITextField *descriptionField;
 
-
 @end
