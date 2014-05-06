@@ -12,7 +12,7 @@
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 
-#define SIDEBAR_OFFSET 65
+#define SIDEBAR_OFFSET 75
 
 
 @interface ListViewController ()
@@ -32,6 +32,8 @@
 
         [self initSidebar];
         [self initNavbar];
+        self.view.backgroundColor = [UIColor whiteColor];
+        
     }
     return self;
 }
@@ -55,8 +57,14 @@
     // Add sidebar on left of screen
     
     UIView *sidebarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH)];
-    UIImageView *sidebarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sidebar.png"]];
-    sidebarImageView.frame = CGRectMake(0, 0, sidebarImageView.frame.size.width/2, sidebarImageView.frame.size.height);
+    
+    sidebarView.backgroundColor = [UIColor whiteColor];
+    
+    //refreshers icon - CHANGE TO WHATEVER CAT WE ARE ON LATER
+    UIImageView *sidebarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"refreshersicon.png"]];
+    sidebarImageView.frame = CGRectMake(0, 30, 70.5, 482);
+    
+    sidebarImageView.backgroundColor = [UIColor whiteColor];
     [sidebarView addSubview:sidebarImageView];
     
     [self.view addSubview:sidebarView];
