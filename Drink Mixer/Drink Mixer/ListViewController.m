@@ -7,6 +7,7 @@
 //
 
 #import "ListViewController.h"
+#import "MakeItViewController.h"
 
 #define firebaseURL @"https://drinkmixer.firebaseio.com/"
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
@@ -41,7 +42,6 @@
 {
     // Logo in the center of navigation bar
     UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
-    // TODO: change image here
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navlogo.png"]];
     titleImageView.frame = CGRectMake(43, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
     [logoView addSubview:titleImageView];
@@ -82,7 +82,8 @@
     self.drinksTableView.separatorStyle=UITableViewCellSeparatorStyleNone; // Get rid of bars separating sections
     self.drinksTableView.delegate = self;
     self.drinksTableView.dataSource = self;
-    [self.drinksTableView setRowHeight:21.5];
+    [self.drinksTableView setRowHeight:30];
+    [self.drinksTableView setAllowsSelection:YES];
     [self.view addSubview:self.drinksTableView];
 }
 
@@ -107,9 +108,9 @@
 //Header
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 20)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 20)];
-    [label setFont:[UIFont fontWithName:@"hiragino kaku gothic pro" size:15]];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 50)];
+    [label setFont:[UIFont fontWithName:@"hiragino kaku gothic pro" size:35]];
     
     [label setText:category];
     [view addSubview:label];
@@ -143,12 +144,19 @@
 }
 
 //checks which row index you hit
--(void)gestureAction:(UITapGestureRecognizer *) sender
+-(void)gestureAction:(UITapGestureRecognizer *)sender
 {
     CGPoint touchLocation = [sender locationOfTouch:0 inView:self.drinksTableView];
     NSIndexPath *indexPath = [self.drinksTableView indexPathForRowAtPoint:touchLocation];
+
+    NSString *name = [self.drinksDataSource objectAtIndex:indexPath.row];
     
-    NSLog(@"%d", indexPath.row);
+    NSArray *parameters = [[NSArray alloc] initWithObjects:category, name, nil];
+    
+    MakeItViewController *mvc = [[MakeItViewController alloc] initCustom:parameters];
+    [self.navigationController pushViewController:mvc animated:NO];
+    
 }
+
 
 @end
