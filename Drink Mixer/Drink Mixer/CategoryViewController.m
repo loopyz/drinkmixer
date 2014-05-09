@@ -9,6 +9,8 @@
 #import "CategoryViewController.h"
 #import "ShareViewController.h"
 #import "ListViewController.h"
+#define firebaseURL @"https://drinkmixer.firebaseio.com/"
+
 
 @interface CategoryViewController ()
 
@@ -23,179 +25,236 @@
         [self initializeNavBar];
         [self addSideImage];
         [self addCatButtons];
-        [self setupRefreshers];
-        [self setupCoffee];
-        [self setupJuice];
-        [self setupShakes];
+        //[self setupRefreshers];
+        [self grabtop3:@"Refreshers"];
+        [self grabtop3:@"Coffee"];
+        [self grabtop3:@"Juice"];
+        [self grabtop3:@"Shakes"];
+        //[self setupCoffee];
+        //[self setupJuice];
+        //[self setupShakes];
         self.view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
 
-- (void)setupRefreshers
+- (void)grabtop3:(NSString *)category
 {
+    //test thing
+    Firebase *ref = [[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:category];
+    
+    NSMutableArray *drinksDataSource = [[NSMutableArray alloc] init];
+    
+    [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSString* ingredient = snapshot.name;
+        //NSLog(ingredient);
+        [drinksDataSource addObject:ingredient];
+        //[self.drinksTableView reloadData];
+        
+        if ([drinksDataSource count] >= 3) {
+            if ([category isEqualToString:@"Refreshers"])
+                [self setupRefreshers:[drinksDataSource objectAtIndex:0] second:[drinksDataSource objectAtIndex:1] third:[drinksDataSource objectAtIndex:2]];
+            else if ([category isEqualToString:@"Coffee"])
+                [self setupCoffee:[drinksDataSource objectAtIndex:0] second:[drinksDataSource objectAtIndex:1] third:[drinksDataSource objectAtIndex:2]];
+            else if ([category isEqualToString:@"Juice"])
+                [self setupJuice:[drinksDataSource objectAtIndex:0] second:[drinksDataSource objectAtIndex:1] third:[drinksDataSource objectAtIndex:2]];
+            else if ([category isEqualToString:@"Shakes"])
+                [self setupShakes:[drinksDataSource objectAtIndex:0] second:[drinksDataSource objectAtIndex:1] third:[drinksDataSource objectAtIndex:2]];
+            
+        }
+    }];
+}
+
+- (void)setupRefreshers:(NSString *)item1 second:(NSString *)item2 third:(NSString *)item3
+{
+    //NSLog(item3);
     //button 1
     UIButton *refreshers1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [refreshers1 setTitle:@"Show View" forState:UIControlStateNormal];
     
     refreshers1.frame = CGRectMake(80, 45, 191, 20.5);
     [refreshers1 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [refreshers1 setImage:btnImage forState:UIControlStateNormal];
+    
+    [refreshers1 setBackgroundImage:btnImage forState:UIControlStateNormal];
     refreshers1.contentMode = UIViewContentModeScaleToFill;
+    
+    //refreshers1.titleLabel = [self.drinksDataSource objectAtIndex:0];
+    
+    [refreshers1 setTitle:item1 forState:UIControlStateNormal];
+    refreshers1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:refreshers1];
     
     //button 2
     UIButton *refreshers2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [refreshers2 setTitle:@"Show View" forState:UIControlStateNormal];
     
     refreshers2.frame = CGRectMake(80, 45 + 25, 191, 20.5);
     [refreshers2 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [refreshers2 setImage:btnImage forState:UIControlStateNormal];
+    [refreshers2 setBackgroundImage:btnImage forState:UIControlStateNormal];
     refreshers2.contentMode = UIViewContentModeScaleToFill;
+    
+    [refreshers2 setTitle:item2 forState:UIControlStateNormal];
+    refreshers2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:refreshers2];
     
     //button 3
     UIButton *refreshers3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [refreshers3 setTitle:@"Show View" forState:UIControlStateNormal];
     
     refreshers3.frame = CGRectMake(80, 45 + 25 + 25, 191, 20.5);
     [refreshers3 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [refreshers3 setImage:btnImage forState:UIControlStateNormal];
+    [refreshers3 setBackgroundImage:btnImage forState:UIControlStateNormal];
     refreshers3.contentMode = UIViewContentModeScaleToFill;
+    
+    [refreshers3 setTitle:item3 forState:UIControlStateNormal];
+    refreshers3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:refreshers3];
 }
 
-- (void) setupCoffee
+- (void) setupCoffee:(NSString *)item1 second:(NSString *)item2 third:(NSString *)item3
 {
     //button 1
     UIButton *coffee1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [coffee1 setTitle:@"Show View" forState:UIControlStateNormal];
     
     coffee1.frame = CGRectMake(80, 160, 191, 20.5);
     [coffee1 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [coffee1 setImage:btnImage forState:UIControlStateNormal];
+    [coffee1 setBackgroundImage:btnImage forState:UIControlStateNormal];
     coffee1.contentMode = UIViewContentModeScaleToFill;
+    
+    [coffee1 setTitle:item1 forState:UIControlStateNormal];
+    coffee1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:coffee1];
     
     //button 2
     UIButton *coffee2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [coffee2 setTitle:@"Show View" forState:UIControlStateNormal];
     
     coffee2.frame = CGRectMake(80, 160 + 25, 191, 20.5);
     [coffee2 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [coffee2 setImage:btnImage forState:UIControlStateNormal];
+    [coffee2 setBackgroundImage:btnImage forState:UIControlStateNormal];
     coffee2.contentMode = UIViewContentModeScaleToFill;
+    
+    [coffee2 setTitle:item2 forState:UIControlStateNormal];
+    coffee2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:coffee2];
     
     //button 3
     UIButton *coffee3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [coffee3 setTitle:@"Show View" forState:UIControlStateNormal];
     
     coffee3.frame = CGRectMake(80, 160 + 25 + 25, 191, 20.5);
     [coffee3 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [coffee3 setImage:btnImage forState:UIControlStateNormal];
+    [coffee3 setBackgroundImage:btnImage forState:UIControlStateNormal];
     coffee3.contentMode = UIViewContentModeScaleToFill;
+    
+    [coffee3 setTitle:item3 forState:UIControlStateNormal];
+    coffee3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:coffee3];
 }
 
-- (void)setupJuice
+- (void)setupJuice:(NSString *)item1 second:(NSString *)item2 third:(NSString *)item3
 {
     //button 1
     UIButton *juice1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [juice1 setTitle:@"Show View" forState:UIControlStateNormal];
     
     juice1.frame = CGRectMake(80, 280, 191, 20.5);
     [juice1 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [juice1 setImage:btnImage forState:UIControlStateNormal];
+    [juice1 setBackgroundImage:btnImage forState:UIControlStateNormal];
     juice1.contentMode = UIViewContentModeScaleToFill;
+    
+    [juice1 setTitle:item1 forState:UIControlStateNormal];
+    juice1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:juice1];
     
     //button 2
     UIButton *juice2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [juice2 setTitle:@"Show View" forState:UIControlStateNormal];
     
     juice2.frame = CGRectMake(80, 280 + 25, 191, 20.5);
     [juice2 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [juice2 setImage:btnImage forState:UIControlStateNormal];
+    [juice2 setBackgroundImage:btnImage forState:UIControlStateNormal];
     juice2.contentMode = UIViewContentModeScaleToFill;
+    
+    [juice2 setTitle:item2 forState:UIControlStateNormal];
+    juice2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:juice2];
     
     //button 3
     UIButton *juice3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [juice3 setTitle:@"Show View" forState:UIControlStateNormal];
     
     juice3.frame = CGRectMake(80, 280 + 25 + 25, 191, 20.5);
     [juice3 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [juice3 setImage:btnImage forState:UIControlStateNormal];
+    [juice3 setBackgroundImage:btnImage forState:UIControlStateNormal];
     juice3.contentMode = UIViewContentModeScaleToFill;
+    
+    [juice3 setTitle:item3 forState:UIControlStateNormal];
+    juice3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:juice3];
 }
 
-- (void)setupShakes
+- (void)setupShakes:(NSString *)item1 second:(NSString *)item2 third:(NSString *)item3
 {
     //button 1
     UIButton *shake1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shake1 setTitle:@"Show View" forState:UIControlStateNormal];
+    [shake1 setTitle:item1 forState:UIControlStateNormal];
     
     shake1.frame = CGRectMake(80, 407, 191, 20.5);
     [shake1 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [shake1 setImage:btnImage forState:UIControlStateNormal];
+    [shake1 setBackgroundImage:btnImage forState:UIControlStateNormal];
     shake1.contentMode = UIViewContentModeScaleToFill;
     
+    shake1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     [self.view addSubview:shake1];
     
     //button 2
     UIButton *shake2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shake2 setTitle:@"Show View" forState:UIControlStateNormal];
+    [shake2 setTitle:item2 forState:UIControlStateNormal];
     
     shake2.frame = CGRectMake(80, 407 + 25, 191, 20.5);
     [shake2 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [shake2 setImage:btnImage forState:UIControlStateNormal];
+    [shake2 setBackgroundImage:btnImage forState:UIControlStateNormal];
     shake2.contentMode = UIViewContentModeScaleToFill;
     
+    shake2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     [self.view addSubview:shake2];
     
     //button 3
     UIButton *shake3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shake3 setTitle:@"Show View" forState:UIControlStateNormal];
+    [shake3 setTitle:item3 forState:UIControlStateNormal];
     
     shake3.frame = CGRectMake(80, 407 + 25 + 25, 191, 20.5);
     [shake3 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
     btnImage = [UIImage imageNamed:@"bluebutton.png"];
-    [shake3 setImage:btnImage forState:UIControlStateNormal];
+    [shake3 setBackgroundImage:btnImage forState:UIControlStateNormal];
     shake3.contentMode = UIViewContentModeScaleToFill;
+    
+    shake3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     
     [self.view addSubview:shake3];
 }
@@ -204,6 +263,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //initialize firebase
+    self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
 }
 
 - (void)didReceiveMemoryWarning

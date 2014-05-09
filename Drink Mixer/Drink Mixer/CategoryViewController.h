@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase/Firebase.h>
 
 @interface CategoryViewController : UIViewController
 
@@ -14,5 +15,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *coffeeButton;
 @property (strong, nonatomic) IBOutlet UIButton *shakesButton;
 @property (strong, nonatomic) IBOutlet UIButton *juiceButton;
+
+
+@property (nonatomic, strong) Firebase* firebase;
+@property (nonatomic, strong) NSArray *drinkKeys;
 
 @end
