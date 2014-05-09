@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase/Firebase.h>
 
 @interface CategoriesViewController : UIViewController 
 
@@ -16,6 +17,12 @@
 @property (strong, nonatomic) IBOutlet UIButton *otherButton;
 
 
+
+@property (nonatomic, strong) NSMutableArray *drinksDataSource;
+@property (nonatomic, strong) UITableView *drinksTableView;
+
+@property (nonatomic, strong) Firebase* firebase;
+@property (nonatomic, strong) NSArray *drinkKeys;
 
 
 @end

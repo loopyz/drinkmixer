@@ -9,6 +9,8 @@
 #import "CategoriesViewController.h"
 #import "ShareViewController.h"
 #import "ListViewController.h"
+#define firebaseURL @"https://drinkmixer.firebaseio.com/"
+
 
 @interface CategoriesViewController () <UITextFieldDelegate>
 
@@ -201,6 +203,22 @@
 
 - (void)viewDidLoad
 {
+    
+    // Initialize Firebase
+    self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
+    
+    //test thing
+    NSString *category = @"Coffee";
+    
+    Firebase *ref = [[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:category];
+    
+    [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSString* ingredient = snapshot.name;
+        [self.drinksDataSource addObject:ingredient];
+        [self.drinksTableView reloadData];
+    }];
+
+    
     NSLog(@"CATEGORIES");
     [super viewDidLoad];
     

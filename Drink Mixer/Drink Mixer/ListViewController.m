@@ -119,6 +119,12 @@
 
 //for each cell in table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //what?
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureAction:)];
+    [recognizer setNumberOfTapsRequired:1];
+    self.view.userInteractionEnabled = YES;
+    [self.view addGestureRecognizer:recognizer];
+    
     static NSString *MyIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil) {
@@ -136,5 +142,13 @@
     return cell;
 }
 
+//checks which row index you hit
+-(void)gestureAction:(UITapGestureRecognizer *) sender
+{
+    CGPoint touchLocation = [sender locationOfTouch:0 inView:self.drinksTableView];
+    NSIndexPath *indexPath = [self.drinksTableView indexPathForRowAtPoint:touchLocation];
+    
+    NSLog(@"%d", indexPath.row);
+}
 
 @end
