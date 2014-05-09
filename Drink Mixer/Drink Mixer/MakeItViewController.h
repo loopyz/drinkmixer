@@ -10,4 +10,6 @@
 
 @interface MakeItViewController : UIViewController
 
+- (id)initCustom:(NSArray *)parameters;
+
 @end
