@@ -82,7 +82,8 @@
     self.drinksTableView.separatorStyle=UITableViewCellSeparatorStyleNone; // Get rid of bars separating sections
     self.drinksTableView.delegate = self;
     self.drinksTableView.dataSource = self;
-    [self.drinksTableView setRowHeight:21.5];
+    [self.drinksTableView setRowHeight:30];
+    [self.drinksTableView setAllowsSelection:YES];
     [self.view addSubview:self.drinksTableView];
 }
 
@@ -107,9 +108,9 @@
 //Header
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 20)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 20)];
-    [label setFont:[UIFont fontWithName:@"hiragino kaku gothic pro" size:15]];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 50)];
+    [label setFont:[UIFont fontWithName:@"hiragino kaku gothic pro" size:35]];
     
     [label setText:category];
     [view addSubview:label];
@@ -134,6 +135,11 @@
     cell.textLabel.text = [self.drinksDataSource objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%d", indexPath.row);
 }
 
 

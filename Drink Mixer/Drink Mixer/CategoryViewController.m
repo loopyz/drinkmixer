@@ -200,6 +200,11 @@
     [self.view addSubview:shake3];
 }
 
+- (void)buttonTouched:(id)sender
+{
+    NSLog(@"someone tried to pick a drink!");
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
