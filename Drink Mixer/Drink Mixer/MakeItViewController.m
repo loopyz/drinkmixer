@@ -7,6 +7,7 @@
 //
 
 #import "MakeItViewController.h"
+#import "RecipeViewController.h"
 #import <Firebase/Firebase.h>
 
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
@@ -19,6 +20,9 @@
     NSMutableArray *recipe;
     int ingredientCount;
     Firebase* firebase;
+    NSString *name;
+    Firebase *ref;
+    NSMutableDictionary *drinkInfo;
 }
 @end
 
@@ -30,18 +34,23 @@
     if (self) {
         recipe = [[NSMutableArray alloc] initWithObjects:nil];
         
-        Firebase *ref = [[[firebase childByAppendingPath:@"drinks"] childByAppendingPath:[parameters objectAtIndex:0]] childByAppendingPath:[parameters objectAtIndex:1]];
+        name = [parameters objectAtIndex:1];
+        
+        ref = [[[firebase childByAppendingPath:@"drinks"] childByAppendingPath:[parameters objectAtIndex:0]] childByAppendingPath:name];
 
         UILabel *drinkName = [[UILabel alloc] initWithFrame:CGRectMake(50, 150, 280, 25)];
         drinkName.textAlignment = NSTextAlignmentLeft;
         drinkName.textColor = [UIColor colorWithRed:46.0/255.0 green:63.0/255.0 blue:81.0/255.0 alpha:1.0];
-        drinkName.text = [parameters objectAtIndex:1];
+        drinkName.text = name;
         [self.view addSubview:drinkName];
-
+        
+        drinkInfo = [[NSMutableDictionary alloc] init];
+        
         // Query Firebase to get ingredients
         [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
             NSString* ingredient = snapshot.name;
             [recipe addObject:ingredient];
+            [drinkInfo setObject:snapshot.value forKey:snapshot.name];
             [self updateRecipe];
             ingredientCount += 1;
         }];
@@ -109,19 +118,18 @@
 
 - (void)launchRecipeScreen
 {
-    NSLog(@"user hit the make it button!");
+    RecipeViewController *rvc = [[RecipeViewController alloc] initWithDrinkInfo:drinkInfo];
+    [self.navigationController pushViewController:rvc animated:NO];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
