@@ -18,6 +18,10 @@
 
 @property (nonatomic, strong) Firebase* firebase;
 @property (nonatomic, strong) NSDictionary *myDrinks;
-@property (nonatomic, strong) NSArray *drinkKeys;
+@property (nonatomic, strong) NSMutableArray *drinkKeys;
+
+@property (nonatomic, strong) NSArray *images;
+
+@property (nonatomic, strong) NSMutableArray *drinksDataSource;
 
 @end

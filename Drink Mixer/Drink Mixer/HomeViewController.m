@@ -25,9 +25,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        //hardcoded images YAY
+        self.images = [[NSArray alloc] initWithObjects: @"berrybubbly.png", @"greenberrybomb.png", @"passionmint.png", @"rosewatercooler.png", @"shakeupberry.png", @"strawberryshort.png", nil];
+        
         [self initializeNavBar];
         
-        [self addBackgroundImage];
+        //[self addBackgroundImage];
+        
+        self.view.backgroundColor = [UIColor whiteColor];
+
+        
         
     }
     return self;
@@ -86,20 +93,26 @@
     //initialize firebase
     self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
     
-    Firebase *ref = [[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:@"cocktails"];
+    Firebase *ref = [[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:@"Refreshers"];
+    
+    self.drinkKeys = [[NSMutableArray alloc] init];
     
     [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         NSString* ingredient = snapshot.name;
         NSLog(ingredient);
+        [self.drinkKeys addObject:ingredient];
+        //[self.drinksTableView reloadData];
+        NSLog(@"Drink Keys Count: %d", [self.drinkKeys count]);
+        [_collectionView reloadData];
+        
     }];
-    
     
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 0;
-    layout.minimumLineSpacing = 20;
+    layout.minimumLineSpacing = 10;
     layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20); //  Top, left, bottom, right
     
-    _collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, frame.size.height-100, frame.size.width)  collectionViewLayout:layout];
+    _collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, frame.size.height-100, frame.size.width + 180)  collectionViewLayout:layout];
     [_collectionView setDataSource:self];
     [_collectionView setDelegate:self];
     
@@ -107,6 +120,8 @@
     [_collectionView setBackgroundColor:[UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1.0]];
     
     [self.view addSubview:_collectionView];
+    
+    NSLog(@"collection view added?!?");
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,7 +139,9 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    NSLog(@"drink keys count %d", [self.drinkKeys count]);
     return [self.drinkKeys count];
+    //return 6;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -135,20 +152,25 @@
     NSString* key = [self.drinkKeys objectAtIndex:indexPath.row];
     NSDictionary* drink = self.myDrinks[key];
     
+    
+    
+    NSString *image = self.images[indexPath.row % [self.images count]];
+    
     // TODO: query firebase for actual drink image and use it here
-    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cup.png"]];
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:image]];
     
     UILabel *label = (UILabel*)[cell.contentView viewWithTag:1];
     
-    if (!label) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 280, 280, 25)];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor colorWithRed:46.0/255.0 green:63.0/255.0 blue:81.0/255.0 alpha:1.0];
-        label.tag = 1;
-        [cell.contentView addSubview:label];
-    }
+//    if (!label) {
+//        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 280, 280, 25)];
+//        label.textAlignment = NSTextAlignmentCenter;
+//        label.textColor = [UIColor colorWithRed:46.0/255.0 green:63.0/255.0 blue:81.0/255.0 alpha:1.0];
+//        label.tag = 1;
+//        [cell.contentView addSubview:label];
+//    }
+//    
+//    label.text = self.myDrinks[[self.drinkKeys objectAtIndex:indexPath.row]][@"name"];
     
-    label.text = self.myDrinks[[self.drinkKeys objectAtIndex:indexPath.row]][@"name"];
     
     return cell;
 }
@@ -158,6 +180,8 @@
     
     NSString* key = [self.drinkKeys objectAtIndex:indexPath.row];
     NSDictionary* drink = self.myDrinks[key];
+    
+    NSLog(@"SELECTED ITEM");
     
     // TODO: launch new screen for displaying how to mix the given drink
     
@@ -169,7 +193,8 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
-    return CGSizeMake(screenWidth/2 - 100, screenHeight/4);
+    //return CGSizeMake(screenWidth/2 - 100, screenHeight/4);
+    return CGSizeMake(150, 150);
 }
 
 
