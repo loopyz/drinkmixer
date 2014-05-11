@@ -9,8 +9,9 @@
 #import "CategoryViewController.h"
 #import "ShareViewController.h"
 #import "ListViewController.h"
-#define firebaseURL @"https://drinkmixer.firebaseio.com/"
+#import "MakeItViewController.h"
 
+#define firebaseURL @"https://drinkmixer.firebaseio.com/"
 
 @interface CategoryViewController ()
 
@@ -83,7 +84,7 @@
     
     [refreshers1 setTitle:item1 forState:UIControlStateNormal];
     refreshers1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    refreshers1.tag = 1;
     [self.view addSubview:refreshers1];
     
     //button 2
@@ -98,7 +99,7 @@
     
     [refreshers2 setTitle:item2 forState:UIControlStateNormal];
     refreshers2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    refreshers2.tag = 1;
     [self.view addSubview:refreshers2];
     
     //button 3
@@ -113,7 +114,7 @@
     
     [refreshers3 setTitle:item3 forState:UIControlStateNormal];
     refreshers3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    refreshers3.tag = 1;
     [self.view addSubview:refreshers3];
 }
 
@@ -131,7 +132,7 @@
     
     [coffee1 setTitle:item1 forState:UIControlStateNormal];
     coffee1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    coffee1.tag = 2;
     [self.view addSubview:coffee1];
     
     //button 2
@@ -146,7 +147,7 @@
     
     [coffee2 setTitle:item2 forState:UIControlStateNormal];
     coffee2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    coffee2.tag = 2;
     [self.view addSubview:coffee2];
     
     //button 3
@@ -161,7 +162,7 @@
     
     [coffee3 setTitle:item3 forState:UIControlStateNormal];
     coffee3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    coffee3.tag = 2;
     [self.view addSubview:coffee3];
 }
 
@@ -179,7 +180,7 @@
     
     [juice1 setTitle:item1 forState:UIControlStateNormal];
     juice1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    juice1.tag = 3;
     [self.view addSubview:juice1];
     
     //button 2
@@ -194,7 +195,7 @@
     
     [juice2 setTitle:item2 forState:UIControlStateNormal];
     juice2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    juice2.tag = 3;
     [self.view addSubview:juice2];
     
     //button 3
@@ -209,7 +210,7 @@
     
     [juice3 setTitle:item3 forState:UIControlStateNormal];
     juice3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    juice3.tag = 3;
     [self.view addSubview:juice3];
 }
 
@@ -261,7 +262,19 @@
 
 - (void)buttonTouched:(id)sender
 {
-    NSLog(@"someone tried to pick a drink!");
+    UIButton *button = (UIButton *)sender;
+    
+    NSString *category = @"Shakes";
+    if (button.tag == 1) {
+        category = @"Refreshers";
+    } else if (button.tag == 2) {
+        category = @"Coffee";
+    } else if (button.tag == 3) {
+        category = @"Juice";
+    }
+    
+    MakeItViewController *mvc = [[MakeItViewController alloc] initCustom:@[category, button.titleLabel.text]];
+    [self.navigationController pushViewController:mvc animated:NO];
 }
 
 - (void)viewDidLoad
