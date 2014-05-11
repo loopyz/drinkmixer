@@ -99,10 +99,8 @@
     
     [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         NSString* ingredient = snapshot.name;
-        NSLog(ingredient);
         [self.drinkKeys addObject:ingredient];
-        //[self.drinksTableView reloadData];
-        NSLog(@"Drink Keys Count: %d", [self.drinkKeys count]);
+        NSLog(@"Drink Keys Count: %lu", (unsigned long)[self.drinkKeys count]);
         [_collectionView reloadData];
         
     }];
@@ -112,7 +110,7 @@
     layout.minimumLineSpacing = 10;
     layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20); //  Top, left, bottom, right
     
-    _collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, frame.size.height-100, frame.size.width + 180)  collectionViewLayout:layout];
+    _collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(-8, 0, frame.size.width + 13, frame.size.height)  collectionViewLayout:layout];
     [_collectionView setDataSource:self];
     [_collectionView setDelegate:self];
     
@@ -181,7 +179,7 @@
     NSString* key = [self.drinkKeys objectAtIndex:indexPath.row];
     NSDictionary* drink = self.myDrinks[key];
     
-    NSLog(@"SELECTED ITEM");
+    NSLog(@"SELECTED ITEM %@", drink);
     
     // TODO: launch new screen for displaying how to mix the given drink
     
@@ -194,7 +192,7 @@
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     //return CGSizeMake(screenWidth/2 - 100, screenHeight/4);
-    return CGSizeMake(150, 150);
+    return CGSizeMake(140, 140);
 }
 
 
