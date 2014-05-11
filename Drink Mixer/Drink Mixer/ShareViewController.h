@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase/Firebase.h>
 
-@interface ShareViewController : UIViewController
+@interface ShareViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource> {
+    UIPickerView *pickerView;
+    NSArray *dataArray;
+}
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UITextField *nameField;
@@ -26,5 +30,8 @@
 @property (strong, nonatomic) UITextField *amt4;
 @property (strong, nonatomic) UITextField *amt5;
 @property (strong, nonatomic) UITextField *amt6;
+
+@property (nonatomic, retain) UIPickerView *pickerView;
+@property (nonatomic, retain) NSArray *dataArray;
 
 @end

@@ -18,12 +18,14 @@
 {
     BOOL mediaPicked;
     UIImage *img;
+    NSString *category;
 }
 @end
 
 @implementation ShareViewController
 @synthesize nameField, ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6;
 @synthesize amt1, amt2, amt3, amt4, amt5, amt6;
+@synthesize pickerView, dataArray;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,6 +43,8 @@
         [self initializeIngredientFields];
         
         [self initializeAddButton];
+
+        category = @"Juice"; // Default value
     }
     return self;
 }
@@ -277,10 +281,11 @@
 - (void)initializeNameField
 {
     //set up fields?
-    int nameFieldWidth = 200;
-    self.nameField.frame = CGRectMake(SCREEN_WIDTH/2-nameFieldWidth/2,10,nameFieldWidth,30);
+    int nameFieldWidth = 180;
+    self.nameField.frame = CGRectMake(10,50,nameFieldWidth,30);
     self.nameField.backgroundColor = [UIColor whiteColor];
     self.nameField.textColor = [UIColor blackColor];
+    self.nameField.text = @"";
     [self.nameField setAlpha:0.8];
     
     //make location text field pretty
@@ -302,7 +307,7 @@
     UIImage *cameraButtonImage = [UIImage imageNamed:@"addcamera.png"];
     [cameraButton setBackgroundImage:cameraButtonImage forState:UIControlStateNormal];
     int buttonWidth = 80;
-    cameraButton.frame = CGRectMake(SCREEN_WIDTH/2 - buttonWidth/2, 50, buttonWidth, 80);
+    cameraButton.frame = CGRectMake(SCREEN_WIDTH - buttonWidth - 10, 50, buttonWidth, 80);
     [cameraButton addTarget:self action:@selector(choosePicture:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cameraButton];
 }
@@ -320,9 +325,14 @@
 
 - (void)addDrink
 {
-    // TODO: actually write to firebase instead of just printing
-    // We should sanitize input (make sure amts are numbers, drink name isn't empty, etc.)
-    NSLog(@"%@", self.nameField.text);
+    Firebase* ref = [[Firebase alloc] initWithUrl:@"https://drinkmixer.firebaseio.com/drinks"];
+    if ([self.nameField.text isEqual: @""]) {
+        NSLog(@"it's empty! :o)");
+        return; // TODO: popup instead
+    }
+    NSLog(@"text is %@", self.nameField.text);
+    ref = [[ref childByAppendingPath:category] childByAppendingPath:self.nameField.text];
+    NSLog(@"%@", ref);
 }
 
 - (void)initializeNavBar
@@ -421,7 +431,7 @@
     img = [UIImage imageWithData:mediaData];
     mediaPicked = YES;
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 65, 50, 130, 130)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 110, 50, 100, 100)];
     [imgView setImage:img];
     [self.view addSubview:imgView];
 }
@@ -448,6 +458,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    dataArray = @[@"Refreshers", @"Coffee", @"Juice", @"Shakes"];
+    
+    pickerView = [[UIPickerView alloc] init];
+    
+    [pickerView setDataSource: self];
+    [pickerView setDelegate: self];
+    
+    [pickerView setFrame:CGRectMake(10, 50.0, 180, 30)];
+    pickerView.showsSelectionIndicator = YES;
+    [pickerView selectRow:2 inComponent:0 animated:YES];
+    
+    [self.view addSubview: pickerView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -468,6 +491,22 @@
     return false;
 }
 
+// Picker view delegate methods
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return [dataArray count];
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return [dataArray objectAtIndex:row];
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    category = [dataArray objectAtIndex:row];
+}
 
 
 @end

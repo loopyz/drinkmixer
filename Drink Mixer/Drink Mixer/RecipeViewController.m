@@ -36,12 +36,18 @@
         int soFar = 0;
         float multiplier = (SCREEN_HEIGHT*1.0)/total;
         int y;
-        NSArray *colors = @[[UIColor colorWithRed:0.616 green:0.114 blue:0.125 alpha:1], [UIColor colorWithRed:0.953 green:0.604 blue:0.761 alpha:1], [UIColor colorWithRed:0.004 green:0.651 blue:0.31 alpha:1], [UIColor colorWithRed:0.478 green:0.8 blue:0.784 alpha:1], [UIColor colorWithRed:0 green:0.682 blue:0.937 alpha:1], [UIColor colorWithRed:0.965 green:0.557 blue:0.337 alpha:1], [UIColor colorWithRed:0.62 green:0 blue:0.224 alpha:1]];
+        NSMutableArray *colors = [[NSMutableArray alloc] initWithArray:@[[UIColor colorWithRed:0.616 green:0.114 blue:0.125 alpha:1], [UIColor colorWithRed:0.953 green:0.604 blue:0.761 alpha:1], [UIColor colorWithRed:0.004 green:0.651 blue:0.31 alpha:1], [UIColor colorWithRed:0.478 green:0.8 blue:0.784 alpha:1], [UIColor colorWithRed:0 green:0.682 blue:0.937 alpha:1], [UIColor colorWithRed:0.965 green:0.557 blue:0.337 alpha:1], [UIColor colorWithRed:0.62 green:0 blue:0.224 alpha:1]]];
+        
+        // Shuffle the array so we get random colors for each ingredient without repeats
+        for (NSInteger i = ([colors count]-1); i > 0; i--)
+        {
+            [colors exchangeObjectAtIndex:i withObjectAtIndex:arc4random_uniform(i+1)];
+        }
         
         for (int i = 0; i < [ingredients count]; i ++ ) {
             y = [[amounts objectAtIndex:i] integerValue] * multiplier;
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, soFar, SCREEN_WIDTH, y)];
-            view.backgroundColor = [colors objectAtIndex:(arc4random() %[colors count])]; // Random colors for each ingredient
+            view.backgroundColor = [colors objectAtIndex:i];
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, y)];
             label.text = [ingredients objectAtIndex:i];
             label.textAlignment = NSTextAlignmentCenter;

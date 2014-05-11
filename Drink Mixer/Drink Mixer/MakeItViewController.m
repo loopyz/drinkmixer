@@ -11,10 +11,6 @@
 #import <Firebase/Firebase.h>
 #import "UIImage+ImageEffects.h"
 
-#define SCREEN_HEIGHT 568.0 - 62 // iPhone 5 screen height - navbar height
-#define SCREEN_WIDTH 320
-
-
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 
@@ -28,6 +24,7 @@
     NSString *name;
     Firebase *ref;
     NSMutableDictionary *drinkInfo;
+    bool favorited;
 }
 @end
 
@@ -63,6 +60,8 @@
             [self updateRecipe];
             ingredientCount += 1;
         }];
+        
+        favorited = false; // TODO: query Firebase for this and update it
     }
     
     return self;
@@ -102,6 +101,7 @@
         
         [self initMakeButton];
         [self initLogo];
+        [self initFavButton];
         
         ingredientCount = 1;
         
@@ -111,7 +111,27 @@
     return self;
 }
 
+- (void)initFavButton
+{
+    UIBarButtonItem *rbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"favorite-faded.png"]
+                                                            style:UIBarButtonItemStylePlain
+                                                           target:self
+                                                           action:@selector(favDrink)];
+    rbb.tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    self.navigationItem.rightBarButtonItem = rbb;
+}
 
+// TODO: write to firebase associated with user if current drink is favorited or not
+- (void)favDrink
+{
+    if (favorited) { // Currently favorited, user is tapping to un-favorite
+        self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"favorite-faded.png"];
+        favorited = false;
+    } else {
+        self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"favorite.png"];
+        favorited = true;
+    }
+}
 
 - (void)updateRecipe
 {
@@ -165,9 +185,21 @@
     titleImageView.frame = CGRectMake(43, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
     [logoView addSubview:titleImageView];
     
+    UIButton *homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    homeButton.frame = CGRectMake(0, 0, 200, 44);
+    [homeButton addTarget:self
+                   action:@selector(launchHome)
+         forControlEvents:UIControlEventTouchUpInside];
+    [logoView addSubview:homeButton];
+    
     titleImageView.alpha = .5;
     
     self.navigationItem.titleView = logoView;
+}
+
+- (void)launchHome
+{
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (void)initMakeButton
