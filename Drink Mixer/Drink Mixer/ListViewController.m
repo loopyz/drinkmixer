@@ -115,17 +115,17 @@
 }
 
 //Header
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
 //    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 50)];
 //    [label setFont:[UIFont fontWithName:@"hiragino kaku gothic pro" size:35]];
 //    
 //    [label setText:category];
 //    [view addSubview:label];
-//    [view setBackgroundColor:[UIColor whiteColor]];
-//     return view;
-//}
+    [view setBackgroundColor:[UIColor whiteColor]];
+     return view;
+}
 
 //for each cell in table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -140,15 +140,40 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
         
-        UIView *cellBgView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 191, 20.5)];
+//        UIView *cellBgView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0, 0)];
+//        
+//        [cellBgView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bluebutton.png"]]];
+//        
+//        [cell setBackgroundView:cellBgView];
         
-        [cellBgView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bluebutton.png"]]];
+//        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+////        [button addTarget:self
+////                   action:@selector(customActionPressed:)
+////         forControlEvents:UIControlEventTouchDown];
+//        button.frame = CGRectMake(0.0f, 0.0f, 191, 20.5);
+//        [button setBackgroundImage:[UIImage imageNamed:@"bluebutton.png"] forState:UIControlStateNormal];
+//        button.contentMode = UIViewContentModeScaleAspectFill;
+//        
+//        [cell addSubview:button];
         
-        [cell setBackgroundView:cellBgView];
+
     }
     
-    cell.textLabel.text = [self.drinksDataSource objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    //        [button addTarget:self
+    //                   action:@selector(customActionPressed:)
+    //         forControlEvents:UIControlEventTouchDown];
+    button.frame = CGRectMake(10.0, 10.0, 191, 20.5);
+    [button setBackgroundImage:[UIImage imageNamed:@"bluebutton.png"] forState:UIControlStateNormal];
+    button.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [cell addSubview:button];
+
+    [button setTitle:[self.drinksDataSource objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+    
+    button.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
+    //cell.textLabel.text = [self.drinksDataSource objectAtIndex:indexPath.row];
+    //cell.textLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     return cell;
 }
 

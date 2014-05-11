@@ -43,7 +43,7 @@
         
         ref = [[[firebase childByAppendingPath:@"drinks"] childByAppendingPath:[parameters objectAtIndex:0]] childByAppendingPath:name];
 
-        UILabel *drinkName = [[UILabel alloc] initWithFrame:CGRectMake(50, 220, 280, 25)];
+        UILabel *drinkName = [[UILabel alloc] initWithFrame:CGRectMake(50, 200, 280, 25)];
         drinkName.textAlignment = NSTextAlignmentLeft;
         drinkName.textColor = [UIColor whiteColor];
         drinkName.text = name;
