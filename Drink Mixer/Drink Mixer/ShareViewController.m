@@ -46,6 +46,8 @@
         [self initializeAddButton];
 
         category = @"Juice"; // Default value
+        
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -66,6 +68,8 @@
     self.amt4 = [[UITextField alloc] init];
     self.amt5 = [[UITextField alloc] init];
     self.amt6 = [[UITextField alloc] init];
+    
+    self.nameField.alpha = 0.0;
 }
 
 - (void)initializeIngredientFields
@@ -80,7 +84,7 @@
     self.ingredient1.backgroundColor = [UIColor whiteColor];
     self.ingredient1.textColor = [UIColor blackColor];
     self.ingredient1.text = @"";
-    [self.ingredient1 setAlpha:0.8];
+    [self.ingredient1 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     self.ingredient1.autocorrectionType = UITextAutocorrectionTypeNo;
     self.ingredient1.keyboardType = UIKeyboardTypeDefault;
@@ -93,10 +97,22 @@
     
     [self.view addSubview:self.ingredient1];
     
+    //draw line for ingred & amount
+    UIView *ingredient1Line = [[UIView alloc] initWithFrame:CGRectMake(yOffset, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 160, 1)];
+    ingredient1Line.backgroundColor = [UIColor grayColor];
+    ingredient1Line.alpha = .5;
+    [self.view addSubview:ingredient1Line];
+    
+    UIView *amtLine1 = [[UIView alloc] initWithFrame:CGRectMake(yOffset + 220, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 30, 1)];
+    amtLine1.backgroundColor = [UIColor grayColor];
+    amtLine1.alpha = .5;
+    [self.view addSubview:amtLine1];
+    
     self.amt1.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
     self.amt1.backgroundColor = [UIColor whiteColor];
     self.amt1.textColor = [UIColor blackColor];
     self.amt1.text = @"";
+    [self.amt1 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     [self.amt1 setAlpha:0.8];
     
     self.amt1.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -127,6 +143,8 @@
     self.ingredient2.delegate = self;
     self.ingredient2.placeholder = @" Ingredient #2";
     
+    [self.ingredient2 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
+    
     [self.view addSubview:self.ingredient2];
     
     self.amt2.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
@@ -134,6 +152,7 @@
     self.amt2.textColor = [UIColor blackColor];
     self.amt2.text = @"";
     [self.amt2 setAlpha:0.8];
+    [self.amt2 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     self.amt2.autocorrectionType = UITextAutocorrectionTypeNo;
     self.amt2.keyboardType = UIKeyboardTypeDefault;
@@ -145,6 +164,17 @@
     self.amt2.placeholder = @" mL";
     
     [self.view addSubview:self.amt2];
+    
+    //draw line for ingred & amount
+    UIView *ingredient2Line = [[UIView alloc] initWithFrame:CGRectMake(yOffset, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 160, 1)];
+    ingredient2Line.backgroundColor = [UIColor grayColor];
+    ingredient2Line.alpha = .5;
+    [self.view addSubview:ingredient2Line];
+    
+    UIView *amtLine2 = [[UIView alloc] initWithFrame:CGRectMake(yOffset + 220, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 30, 1)];
+    amtLine2.backgroundColor = [UIColor grayColor];
+    amtLine2.alpha = .5;
+    [self.view addSubview:amtLine2];
     
     count += 2;
     
@@ -163,6 +193,8 @@
     self.ingredient3.delegate = self;
     self.ingredient3.placeholder = @" Ingredient #3";
     
+    [self.ingredient3 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
+    
     [self.view addSubview:self.ingredient3];
     
     self.amt3.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
@@ -170,6 +202,7 @@
     self.amt3.textColor = [UIColor blackColor];
     self.amt3.text = @"";
     [self.amt3 setAlpha:0.8];
+    [self.amt3 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     self.amt3.autocorrectionType = UITextAutocorrectionTypeNo;
     self.amt3.keyboardType = UIKeyboardTypeDefault;
@@ -181,6 +214,17 @@
     self.amt3.placeholder = @" mL";
     
     [self.view addSubview:self.amt3];
+    
+    //draw line for ingred & amount
+    UIView *ingredient3Line = [[UIView alloc] initWithFrame:CGRectMake(yOffset, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 160, 1)];
+    ingredient3Line.backgroundColor = [UIColor grayColor];
+    ingredient3Line.alpha = .5;
+    [self.view addSubview:ingredient3Line];
+    
+    UIView *amtLine3 = [[UIView alloc] initWithFrame:CGRectMake(yOffset + 220, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 30, 1)];
+    amtLine3.backgroundColor = [UIColor grayColor];
+    amtLine3.alpha = .5;
+    [self.view addSubview:amtLine3];
     
     count += 2;
     
@@ -198,6 +242,7 @@
     self.ingredient4.borderStyle = UITextBorderStyleNone;
     self.ingredient4.delegate = self;
     self.ingredient4.placeholder = @" Ingredient #4";
+    [self.ingredient4 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     [self.view addSubview:self.ingredient4];
     
@@ -206,6 +251,7 @@
     self.amt4.textColor = [UIColor blackColor];
     self.amt4.text = @"";
     [self.amt4 setAlpha:0.8];
+    [self.amt4 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     self.amt4.autocorrectionType = UITextAutocorrectionTypeNo;
     self.amt4.keyboardType = UIKeyboardTypeDefault;
@@ -218,6 +264,17 @@
     
     [self.view addSubview:self.amt4];
     
+    //draw line for ingred & amount
+    UIView *ingredient4Line = [[UIView alloc] initWithFrame:CGRectMake(yOffset, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 160, 1)];
+    ingredient4Line.backgroundColor = [UIColor grayColor];
+    ingredient4Line.alpha = .5;
+    [self.view addSubview:ingredient4Line];
+    
+    UIView *amtLine4 = [[UIView alloc] initWithFrame:CGRectMake(yOffset + 220, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 30, 1)];
+    amtLine4.backgroundColor = [UIColor grayColor];
+    amtLine4.alpha = .5;
+    [self.view addSubview:amtLine4];
+    
     count += 2;
     
     self.ingredient5.frame = CGRectMake(yOffset, SCREEN_HEIGHT/2-topMargin + count * margin, ingredientFieldWidth, 30);
@@ -225,6 +282,7 @@
     self.ingredient5.textColor = [UIColor blackColor];
     self.ingredient5.text = @"";
     [self.ingredient5 setAlpha:0.8];
+    [self.ingredient5 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     self.ingredient5.autocorrectionType = UITextAutocorrectionTypeNo;
     self.ingredient5.keyboardType = UIKeyboardTypeDefault;
@@ -251,8 +309,20 @@
     self.amt5.borderStyle = UITextBorderStyleNone;
     self.amt5.delegate = self;
     self.amt5.placeholder = @" mL";
+    [self.amt5 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     [self.view addSubview:self.amt5];
+    
+    //draw line for ingred & amount
+    UIView *ingredient5Line = [[UIView alloc] initWithFrame:CGRectMake(yOffset, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 160, 1)];
+    ingredient5Line.backgroundColor = [UIColor grayColor];
+    ingredient5Line.alpha = .5;
+    [self.view addSubview:ingredient5Line];
+    
+    UIView *amtLine5 = [[UIView alloc] initWithFrame:CGRectMake(yOffset + 220, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 30, 1)];
+    amtLine5.backgroundColor = [UIColor grayColor];
+    amtLine5.alpha = .5;
+    [self.view addSubview:amtLine5];
     
     count += 2;
     
@@ -261,6 +331,7 @@
     self.ingredient6.textColor = [UIColor blackColor];
     self.ingredient6.text = @"";
     [self.ingredient6 setAlpha:0.8];
+    [self.ingredient6 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     self.ingredient6.autocorrectionType = UITextAutocorrectionTypeNo;
     self.ingredient6.keyboardType = UIKeyboardTypeDefault;
@@ -278,6 +349,7 @@
     self.amt6.textColor = [UIColor blackColor];
     self.amt6.text = @"";
     [self.amt6 setAlpha:0.8];
+    [self.amt6 setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     
     self.amt6.autocorrectionType = UITextAutocorrectionTypeNo;
     self.amt6.keyboardType = UIKeyboardTypeDefault;
@@ -289,17 +361,29 @@
     self.amt6.placeholder = @" mL";
     
     [self.view addSubview:self.amt6];
+    
+    //draw line for ingred & amount
+    UIView *ingredient6Line = [[UIView alloc] initWithFrame:CGRectMake(yOffset, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 160, 1)];
+    ingredient6Line.backgroundColor = [UIColor grayColor];
+    ingredient6Line.alpha = .5;
+    [self.view addSubview:ingredient6Line];
+    
+    UIView *amtLine6 = [[UIView alloc] initWithFrame:CGRectMake(yOffset + 220, SCREEN_HEIGHT/2 - topMargin + count * margin + 30, 30, 1)];
+    amtLine6.backgroundColor = [UIColor grayColor];
+    amtLine6.alpha = .5;
+    [self.view addSubview:amtLine6];
 }
 
 - (void)initializeNameField
 {
     //set up fields?
     int nameFieldWidth = 180;
-    self.nameField.frame = CGRectMake(10,50,nameFieldWidth,30);
+    self.nameField.frame = CGRectMake(10,30,nameFieldWidth,30);
     self.nameField.backgroundColor = [UIColor whiteColor];
     self.nameField.textColor = [UIColor blackColor];
     self.nameField.text = @"";
-    [self.nameField setAlpha:0.8];
+    
+    [self.nameField setAlpha:1];
     
     //make location text field pretty
     self.nameField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -312,6 +396,12 @@
     self.nameField.placeholder = @" Name of drink";
     
     [self.view addSubview:self.nameField];
+    
+    //draw line
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 60, 180, 1)];
+    lineView.backgroundColor = [UIColor grayColor];
+    lineView.alpha = .5;
+    [self.view addSubview:lineView];
 }
 
 - (void)initializeCameraButton
@@ -320,7 +410,7 @@
     UIImage *cameraButtonImage = [UIImage imageNamed:@"addcamera.png"];
     [cameraButton setBackgroundImage:cameraButtonImage forState:UIControlStateNormal];
     int buttonWidth = 80;
-    cameraButton.frame = CGRectMake(SCREEN_WIDTH - buttonWidth - 10, 50, buttonWidth, 80);
+    cameraButton.frame = CGRectMake(SCREEN_WIDTH - buttonWidth - 10, 30, buttonWidth, 80);
     [cameraButton addTarget:self action:@selector(choosePicture:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cameraButton];
 }
@@ -328,10 +418,10 @@
 - (void)initializeAddButton
 {
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *addButtonImage = [UIImage imageNamed:@"addButton.png"];
+    UIImage *addButtonImage = [UIImage imageNamed:@"sharebutton.png"];
     [addButton setBackgroundImage:addButtonImage forState:UIControlStateNormal];
     int buttonWidth = 200;
-    addButton.frame = CGRectMake(SCREEN_WIDTH/2 - buttonWidth/2, SCREEN_HEIGHT - 130, buttonWidth, 50);
+    addButton.frame = CGRectMake(SCREEN_WIDTH/2 - buttonWidth/2 - 35, SCREEN_HEIGHT - 130, 273.5, 39);
     [addButton addTarget:self action:@selector(addDrink) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addButton];
 }
@@ -579,16 +669,43 @@
     
     dataArray = @[@"Refreshers", @"Coffee", @"Juice", @"Shakes"];
     
+    //add category label
+    UILabel *cat = [[UILabel alloc] initWithFrame:CGRectMake(15, 70, 300, 20)];
+    
+    [cat setTextColor:[UIColor grayColor]];
+    [cat setBackgroundColor:[UIColor clearColor]];
+    [cat setFont:[UIFont fontWithName: @"Trebuchet MS" size: 19.0f]];
+    cat.text = @"Category:";
+    [self.view addSubview:cat];
+    
     pickerView = [[UIPickerView alloc] init];
     
-    [pickerView setDataSource: self];
     [pickerView setDelegate: self];
     
-    [pickerView setFrame:CGRectMake(10, 50.0, 180, 30)];
+    [pickerView setFrame:CGRectMake(15, 75.0, 180, 30)];
     pickerView.showsSelectionIndicator = YES;
     [pickerView selectRow:2 inComponent:0 animated:YES];
     
     [self.view addSubview: pickerView];
+    
+    
+    
+}
+
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel* tView = (UILabel*)view;
+    dataArray = @[@"Refreshers", @"Coffee", @"Juice", @"Shakes"];
+    if (!tView){
+        tView = [[UILabel alloc] init];
+        tView.font = [tView.font fontWithSize:12];
+    }
+    // Fill the label text here
+    
+    tView.text = dataArray[row];
+
+    
+    return tView;
 }
 
 - (void)didReceiveMemoryWarning
