@@ -29,6 +29,8 @@
     self = [super initWithNibName:nil bundle:nibBundleOrNil];
     category = nibNameOrNil;
     if (self) {
+        self.textColor = [UIColor colorWithRed:221/255.0f green:31/255.0f blue:38/255.0f alpha:1.0f];
+        
         self.drinksDataSource = [[NSMutableArray alloc] initWithObjects:nil];
         [self initSidebar];
         [self initNavbar];
@@ -172,6 +174,8 @@
     [button setTitle:[self.drinksDataSource objectAtIndex:indexPath.row] forState:UIControlStateNormal];
     
     button.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
+    
+    button.titleLabel.textColor = self.textColor;
     //cell.textLabel.text = [self.drinksDataSource objectAtIndex:indexPath.row];
     //cell.textLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     return cell;

@@ -23,6 +23,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.textColor = [UIColor colorWithRed:221/255.0f green:31/255.0f blue:38/255.0f alpha:1.0f];
+        
         [self initializeNavBar];
         [self addSideImage];
         [self addCatButtons];
@@ -35,6 +37,8 @@
         //[self setupJuice];
         //[self setupShakes];
         self.view.backgroundColor = [UIColor whiteColor];
+        
+        
     }
     return self;
 }
@@ -84,6 +88,7 @@
     
     [refreshers1 setTitle:item1 forState:UIControlStateNormal];
     refreshers1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
+    refreshers1.titleLabel.textColor = self.textColor;
     refreshers1.tag = 1;
     [self.view addSubview:refreshers1];
     
@@ -100,6 +105,7 @@
     [refreshers2 setTitle:item2 forState:UIControlStateNormal];
     refreshers2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     refreshers2.tag = 1;
+    refreshers2.titleLabel.textColor = self.textColor;
     [self.view addSubview:refreshers2];
     
     //button 3
@@ -115,6 +121,7 @@
     [refreshers3 setTitle:item3 forState:UIControlStateNormal];
     refreshers3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     refreshers3.tag = 1;
+    refreshers3.titleLabel.textColor = self.textColor;
     [self.view addSubview:refreshers3];
 }
 
@@ -130,9 +137,11 @@
     [coffee1 setBackgroundImage:btnImage forState:UIControlStateNormal];
     coffee1.contentMode = UIViewContentModeScaleToFill;
     
+    
     [coffee1 setTitle:item1 forState:UIControlStateNormal];
     coffee1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     coffee1.tag = 2;
+    coffee1.titleLabel.textColor = self.textColor;
     [self.view addSubview:coffee1];
     
     //button 2
@@ -148,6 +157,7 @@
     [coffee2 setTitle:item2 forState:UIControlStateNormal];
     coffee2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     coffee2.tag = 2;
+    coffee2.titleLabel.textColor = self.textColor;
     [self.view addSubview:coffee2];
     
     //button 3
@@ -163,6 +173,7 @@
     [coffee3 setTitle:item3 forState:UIControlStateNormal];
     coffee3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     coffee3.tag = 2;
+    coffee3.titleLabel.textColor = self.textColor;
     [self.view addSubview:coffee3];
 }
 
@@ -181,6 +192,7 @@
     [juice1 setTitle:item1 forState:UIControlStateNormal];
     juice1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     juice1.tag = 3;
+    juice1.titleLabel.textColor = self.textColor;
     [self.view addSubview:juice1];
     
     //button 2
@@ -196,6 +208,7 @@
     [juice2 setTitle:item2 forState:UIControlStateNormal];
     juice2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     juice2.tag = 3;
+    juice2.titleLabel.textColor = self.textColor;
     [self.view addSubview:juice2];
     
     //button 3
@@ -211,6 +224,7 @@
     [juice3 setTitle:item3 forState:UIControlStateNormal];
     juice3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
     juice3.tag = 3;
+    juice3.titleLabel.textColor = self.textColor;
     [self.view addSubview:juice3];
 }
 
@@ -228,6 +242,7 @@
     shake1.contentMode = UIViewContentModeScaleToFill;
     
     shake1.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
+    shake1.titleLabel.textColor = self.textColor;
     [self.view addSubview:shake1];
     
     //button 2
@@ -242,6 +257,7 @@
     shake2.contentMode = UIViewContentModeScaleToFill;
     
     shake2.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
+    shake2.titleLabel.textColor = self.textColor;
     [self.view addSubview:shake2];
     
     //button 3
@@ -256,7 +272,7 @@
     shake3.contentMode = UIViewContentModeScaleToFill;
     
     shake3.titleLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:10];
-    
+    shake3.titleLabel.textColor = self.textColor;
     [self.view addSubview:shake3];
 }
 

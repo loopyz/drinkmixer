@@ -20,4 +20,6 @@
 @property (nonatomic, strong) Firebase* firebase;
 @property (nonatomic, strong) NSArray *drinkKeys;
 
+@property (nonatomic, strong) UIColor *textColor;
+
 @end
