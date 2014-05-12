@@ -123,6 +123,7 @@
     refreshers3.tag = 1;
     refreshers3.titleLabel.textColor = self.textColor;
     [self.view addSubview:refreshers3];
+    
 }
 
 - (void) setupCoffee:(NSString *)item1 second:(NSString *)item2 third:(NSString *)item3
@@ -175,6 +176,8 @@
     coffee3.tag = 2;
     coffee3.titleLabel.textColor = self.textColor;
     [self.view addSubview:coffee3];
+    
+    
 }
 
 - (void)setupJuice:(NSString *)item1 second:(NSString *)item2 third:(NSString *)item3
@@ -404,7 +407,7 @@
     // Logo in the center of navigation bar
     UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navlogo.png"]];
-    titleImageView.frame = CGRectMake(43, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
+    titleImageView.frame = CGRectMake(59, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
     [logoView addSubview:titleImageView];
     
     UIButton *homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
