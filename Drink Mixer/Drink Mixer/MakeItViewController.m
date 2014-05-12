@@ -312,7 +312,7 @@
     // Logo in the center of navigation bar
     UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navlogo.png"]];
-    titleImageView.frame = CGRectMake(43, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
+    titleImageView.frame = CGRectMake(59, 8, titleImageView.frame.size.width/2, titleImageView.frame.size.height/2);
     [logoView addSubview:titleImageView];
     
     UIButton *homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
