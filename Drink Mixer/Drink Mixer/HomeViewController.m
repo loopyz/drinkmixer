@@ -37,6 +37,8 @@
     return self;
 }
 
+
+
 - (void)initializeNavBar
 {
     // Background image for navbar
@@ -224,6 +226,8 @@
     return [self.drinkNames count];
 }
 
+
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier"
@@ -231,7 +235,27 @@
     
     cell.backgroundColor = [UIColor colorWithPatternImage:self.images[indexPath.row]];
     
+    
     UILabel *label = (UILabel*)[cell.contentView viewWithTag:1];
+    
+    NSString* name = [self.drinkNames objectAtIndex:indexPath.row];
+    NSString* category = [self.drinkCategories objectAtIndex:indexPath.row];
+    
+    UIView *box = [[UIView alloc] initWithFrame:CGRectMake(0, 120, 140, 30)];
+    box.backgroundColor = [UIColor whiteColor];
+    box.alpha  = .4;
+    [cell addSubview:box];
+    
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 115, 140, 30)];
+    nameLabel.text = name;
+    nameLabel.textColor = [UIColor whiteColor];
+    nameLabel.textAlignment = NSTextAlignmentCenter;
+    nameLabel.font = [UIFont fontWithName:@"hiragino kaku gothic pro" size:12];
+
+    [cell addSubview:nameLabel];
+    
+    
+
     
 //    if (!label) {
 //        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 280, 280, 25)];
@@ -263,6 +287,9 @@
 {
     return CGSizeMake(140, 140);
 }
+
+
+
 
 
 @end
