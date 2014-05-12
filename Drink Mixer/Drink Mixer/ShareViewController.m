@@ -10,6 +10,7 @@
 #import "CategoryViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "NSStrinAdditions.h" // For storing images in Firebase
 
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
@@ -78,6 +79,7 @@
     self.ingredient1.frame = CGRectMake(yOffset, SCREEN_HEIGHT/2-topMargin + count * margin, ingredientFieldWidth, 30);
     self.ingredient1.backgroundColor = [UIColor whiteColor];
     self.ingredient1.textColor = [UIColor blackColor];
+    self.ingredient1.text = @"";
     [self.ingredient1 setAlpha:0.8];
     
     self.ingredient1.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -94,6 +96,7 @@
     self.amt1.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
     self.amt1.backgroundColor = [UIColor whiteColor];
     self.amt1.textColor = [UIColor blackColor];
+    self.amt1.text = @"";
     [self.amt1 setAlpha:0.8];
     
     self.amt1.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -112,6 +115,7 @@
     self.ingredient2.frame = CGRectMake(yOffset, SCREEN_HEIGHT/2-topMargin + count * margin, ingredientFieldWidth, 30);
     self.ingredient2.backgroundColor = [UIColor whiteColor];
     self.ingredient2.textColor = [UIColor blackColor];
+    self.ingredient2.text = @"";
     [self.ingredient2 setAlpha:0.8];
     
     self.ingredient2.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -128,6 +132,7 @@
     self.amt2.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
     self.amt2.backgroundColor = [UIColor whiteColor];
     self.amt2.textColor = [UIColor blackColor];
+    self.amt2.text = @"";
     [self.amt2 setAlpha:0.8];
     
     self.amt2.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -146,6 +151,7 @@
     self.ingredient3.frame = CGRectMake(yOffset, SCREEN_HEIGHT/2-topMargin + count * margin, ingredientFieldWidth, 30);
     self.ingredient3.backgroundColor = [UIColor whiteColor];
     self.ingredient3.textColor = [UIColor blackColor];
+    self.ingredient3.text = @"";
     [self.ingredient3 setAlpha:0.8];
     
     self.ingredient3.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -162,6 +168,7 @@
     self.amt3.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
     self.amt3.backgroundColor = [UIColor whiteColor];
     self.amt3.textColor = [UIColor blackColor];
+    self.amt3.text = @"";
     [self.amt3 setAlpha:0.8];
     
     self.amt3.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -180,6 +187,7 @@
     self.ingredient4.frame = CGRectMake(yOffset, SCREEN_HEIGHT/2-topMargin + count * margin, ingredientFieldWidth, 30);
     self.ingredient4.backgroundColor = [UIColor whiteColor];
     self.ingredient4.textColor = [UIColor blackColor];
+    self.ingredient4.text = @"";
     [self.ingredient4 setAlpha:0.8];
     
     self.ingredient4.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -196,6 +204,7 @@
     self.amt4.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
     self.amt4.backgroundColor = [UIColor whiteColor];
     self.amt4.textColor = [UIColor blackColor];
+    self.amt4.text = @"";
     [self.amt4 setAlpha:0.8];
     
     self.amt4.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -214,6 +223,7 @@
     self.ingredient5.frame = CGRectMake(yOffset, SCREEN_HEIGHT/2-topMargin + count * margin, ingredientFieldWidth, 30);
     self.ingredient5.backgroundColor = [UIColor whiteColor];
     self.ingredient5.textColor = [UIColor blackColor];
+    self.ingredient5.text = @"";
     [self.ingredient5 setAlpha:0.8];
     
     self.ingredient5.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -230,6 +240,7 @@
     self.amt5.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
     self.amt5.backgroundColor = [UIColor whiteColor];
     self.amt5.textColor = [UIColor blackColor];
+    self.amt5.text = @"";
     [self.amt5 setAlpha:0.8];
     
     self.amt5.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -248,6 +259,7 @@
     self.ingredient6.frame = CGRectMake(yOffset, SCREEN_HEIGHT/2-topMargin + count * margin, ingredientFieldWidth, 30);
     self.ingredient6.backgroundColor = [UIColor whiteColor];
     self.ingredient6.textColor = [UIColor blackColor];
+    self.ingredient6.text = @"";
     [self.ingredient6 setAlpha:0.8];
     
     self.ingredient6.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -264,6 +276,7 @@
     self.amt6.frame = CGRectMake(yOffset + margin + ingredientFieldWidth, SCREEN_HEIGHT/2-topMargin + count * margin, 40, 30);
     self.amt6.backgroundColor = [UIColor whiteColor];
     self.amt6.textColor = [UIColor blackColor];
+    self.amt6.text = @"";
     [self.amt6 setAlpha:0.8];
     
     self.amt6.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -327,12 +340,117 @@
 {
     Firebase* ref = [[Firebase alloc] initWithUrl:@"https://drinkmixer.firebaseio.com/drinks"];
     if ([self.nameField.text isEqual: @""]) {
-        NSLog(@"it's empty! :o)");
-        return; // TODO: popup instead
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error: No Drink Name"
+                                                        message:@"Name of drink can't be empty."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
     }
-    NSLog(@"text is %@", self.nameField.text);
     ref = [[ref childByAppendingPath:category] childByAppendingPath:self.nameField.text];
-    NSLog(@"%@", ref);
+    
+    NSMutableDictionary *ingredients = [[NSMutableDictionary alloc] init];
+    
+    if (![self.ingredient1.text isEqual: @""]) {
+        if ((![self.amt1.text isEqual: @""]) && ([self.amt1.text rangeOfCharacterFromSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet]].location == NSNotFound)) {
+            [ingredients setObject:self.amt1.text forKey:self.ingredient1.text];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error: Invalid Ingredient #1"
+                                                            message:@"No amount specified or invalid amount."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    if (![self.ingredient2.text isEqual: @""]) {
+        if ((![self.amt2.text isEqual: @""]) && ([self.amt2.text rangeOfCharacterFromSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet]].location == NSNotFound)) {
+            [ingredients setObject:self.amt2.text forKey:self.ingredient2.text];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error: Invalid Ingredient #2"
+                                                            message:@"No amount specified or invalid amount."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    if (![self.ingredient3.text isEqual: @""]) {
+        if ((![self.amt3.text isEqual: @""]) && ([self.amt3.text rangeOfCharacterFromSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet]].location == NSNotFound)) {
+            [ingredients setObject:self.amt3.text forKey:self.ingredient3.text];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error: Invalid Ingredient #3"
+                                                            message:@"No amount specified or invalid amount."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    if (![self.ingredient4.text isEqual: @""]) {
+        if ((![self.amt4.text isEqual: @""]) && ([self.amt4.text rangeOfCharacterFromSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet]].location == NSNotFound)) {
+            [ingredients setObject:self.amt4.text forKey:self.ingredient4.text];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error: Invalid Ingredient #4"
+                                                            message:@"No amount specified or invalid amount."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    if (![self.ingredient5.text isEqual: @""]) {
+        if ((![self.amt5.text isEqual: @""]) && ([self.amt5.text rangeOfCharacterFromSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet]].location == NSNotFound)) {
+            [ingredients setObject:self.amt5.text forKey:self.ingredient5.text];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error: Invalid Ingredient #5"
+                                                            message:@"No amount specified or invalid amount."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    if (![self.ingredient6.text isEqual: @""]) {
+        if ((![self.amt6.text isEqual: @""]) && ([self.amt6.text rangeOfCharacterFromSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet]].location == NSNotFound)) {
+            [ingredients setObject:self.amt6.text forKey:self.ingredient6.text];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error: Invalid Ingredient #1"
+                                                            message:@"No amount specified or invalid amount."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    if (mediaPicked == YES) {
+            NSData *imageData = UIImageJPEGRepresentation(img, 0.9);
+            NSString *imageString = [NSString base64StringFromData:imageData length:[imageData length]];
+           [ingredients setObject:imageString forKey:@"image"];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error: No Image"
+                                                        message:@"Upload an image of your drink!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    [ref setValue:ingredients];
 }
 
 - (void)initializeNavBar

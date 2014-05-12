@@ -54,11 +54,23 @@
         
         // Query Firebase to get ingredients
         [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-            NSString* ingredient = snapshot.name;
-            [recipe addObject:ingredient];
-            [drinkInfo setObject:snapshot.value forKey:snapshot.name];
-            [self updateRecipe];
-            ingredientCount += 1;
+            if ([snapshot.name isEqual: @"image"]) { // Update background image from Firebase
+                NSData *dataFromBase64=[self base64DataFromString:snapshot.value];
+                UIImage *image = [[UIImage alloc]initWithData:dataFromBase64];
+                
+                UIImage *croppedImage = [image crop:CGRectMake(0, 300, SCREEN_WIDTH, 270)];
+                UIImage *blurredbg = [croppedImage applyLightEffect];
+                UIImageView *blurredView = (UIImageView*)[self.view viewWithTag:391];
+                blurredView.image = blurredbg;
+                
+                self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+            } else {  // Update ingredients list
+                NSString* ingredient = snapshot.name;
+                [recipe addObject:ingredient];
+                [drinkInfo setObject:snapshot.value forKey:snapshot.name];
+                [self updateRecipe];
+                ingredientCount += 1;
+            }
         }];
         
         favorited = false; // TODO: query Firebase for this and update it
@@ -67,16 +79,107 @@
     return self;
 }
 
+- (NSData *)base64DataFromString: (NSString *)string {
+    unsigned long ixtext, lentext;
+    unsigned char ch, input[4], output[3];
+    short i, ixinput;
+    Boolean flignore, flendtext = false;
+    const char *temporary;
+    NSMutableData *result;
+    
+    if (!string) {
+        return [NSData data];
+    }
+    
+    ixtext = 0;
+    
+    temporary = [string UTF8String];
+    
+    lentext = [string length];
+    
+    result = [NSMutableData dataWithCapacity: lentext];
+    
+    ixinput = 0;
+    
+    while (true) {
+        if (ixtext >= lentext) {
+            break;
+        }
+        
+        ch = temporary[ixtext++];
+        
+        flignore = false;
+        
+        if ((ch >= 'A') && (ch <= 'Z')) {
+            ch = ch - 'A';
+        } else if ((ch >= 'a') && (ch <= 'z')) {
+            ch = ch - 'a' + 26;
+        } else if ((ch >= '0') && (ch <= '9')) {
+            ch = ch - '0' + 52;
+        } else if (ch == '+') {
+            ch = 62;
+        } else if (ch == '=') {
+            flendtext = true;
+        } else if (ch == '/') {
+            ch = 63;
+        } else {
+            flignore = true;
+        }
+        
+        if (!flignore) {
+            short ctcharsinput = 3;
+            Boolean flbreak = false;
+            
+            if (flendtext) {
+                if (ixinput == 0) {
+                    break;
+                }
+                
+                if ((ixinput == 1) || (ixinput == 2)) {
+                    ctcharsinput = 1;
+                } else {
+                    ctcharsinput = 2;
+                }
+                
+                ixinput = 3;
+                
+                flbreak = true;
+            }
+            
+            input[ixinput++] = ch;
+            
+            if (ixinput == 4) {
+                ixinput = 0;
+                
+                unsigned char0 = input[0];
+                unsigned char1 = input[1];
+                unsigned char2 = input[2];
+                unsigned char3 = input[3];
+                
+                output[0] = (char0 << 2) | ((char1 & 0x30) >> 4);
+                output[1] = ((char1 & 0x0F) << 4) | ((char2 & 0x3C) >> 2);
+                output[2] = ((char2 & 0x03) << 6) | (char3 & 0x3F);
+                
+                for (i = 0; i < ctcharsinput; i++) {
+                    [result appendBytes: &output[i] length: 1];
+                }
+            }
+            
+            if (flbreak) {
+                break;
+            }
+        }
+    }
+    
+    return result;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nil bundle:nibBundleOrNil];
 
     if (self) {
-        //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lemonade.jpg"]];
-        
-        
         UIImage *bg = [UIImage imageNamed:@"lemonade.jpg"];
-        
         
         //blurring image on bottom
         UIImage *croppedImage = [bg crop:CGRectMake(0, 300, SCREEN_WIDTH, 270)];
@@ -84,20 +187,14 @@
         UIImage *blurredbg = [croppedImage applyLightEffect];
         UIImageView *blurredView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 250, SCREEN_WIDTH, 270)];
         blurredView.image = blurredbg;
+        blurredView.tag = 391;
         [self.view addSubview:blurredView];
 
         [self drawRect];
 
         
         self.view.backgroundColor = [UIColor colorWithPatternImage:bg];
-        
-        //blured image code?
-        //    UIImage *bg = [[UIImage imageNamed:@"adrenaline-bg.png"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0];
-        //    UIImage *blurredbg = [bg applyDarkEffect];
-        
-        
-        //    cell.backgroundView = [[UIImageView alloc] initWithImage:blurredbg];
-        //    cell.selectedBackgroundView =  [[UIImageView alloc] initWithImage: blurredbg];
+
         
         [self initMakeButton];
         [self initLogo];
@@ -110,6 +207,11 @@
     }
     return self;
 }
+
+/*- (UIImage *)blurImage:(UIImage *)image
+{
+    
+}*/
 
 - (void)initFavButton
 {
@@ -153,8 +255,6 @@
 - (void)drawRect
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 250, SCREEN_WIDTH, 270)];
-    
-    //UIColor * color = [UIColor colorWithRed:190/255.0f green:190/255.0f blue:190/255.0f alpha:1.0f];
     view.backgroundColor = [UIColor blackColor];
     view.alpha = .3;
     [self.view addSubview:view];
