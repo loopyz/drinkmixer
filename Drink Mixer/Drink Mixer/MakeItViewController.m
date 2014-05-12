@@ -73,7 +73,27 @@
             }
         }];
         
-        favorited = false; // TODO: query Firebase for this and update it
+        //FIREBASE STUFF
+        NSString *url = @"https://drinkmixer.firebaseio.com/users/lguo/favorites/";
+        NSString *drinkURL = [url stringByAppendingString:name];
+        
+        Firebase* ref = [[Firebase alloc] initWithUrl:drinkURL];
+        
+        [ref observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if(snapshot.value == [NSNull null]) {
+                NSLog(drinkURL);
+                favorited = false;
+            } else {
+//                NSString* firstName = snapshot.value[@"name"][@"first"];
+//                NSString* lastName = snapshot.value[@"name"][@"last"];
+//                NSLog(@"User julie's full name is: %@ %@", firstName, lastName);
+                NSLog(@"drink is favorited");
+                favorited = true;
+            }
+        }];
+        
+        
+        //favorited = false; // TODO: query Firebase for this and update it
     }
     
     return self;
@@ -229,9 +249,21 @@
     if (favorited) { // Currently favorited, user is tapping to un-favorite
         self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"favorite-faded.png"];
         favorited = false;
+        NSString *url = @"https://drinkmixer.firebaseio.com/users/lguo/favorites/";
+        NSString *drinkURL = [url stringByAppendingString:name];
+        
+        Firebase* ref = [[Firebase alloc] initWithUrl:drinkURL];
+        
+        [ref removeValue];
+        
     } else {
         self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"favorite.png"];
         favorited = true;
+        
+        Firebase* ref = [[Firebase alloc] initWithUrl:@"https://drinkmixer.firebaseio.com/users/lguo/favorites"];
+
+        [[ref childByAppendingPath:name] setValue:@"true"];
+        
     }
 }
 
