@@ -68,7 +68,6 @@
 
 - (void)setupRefreshers:(NSString *)item1 second:(NSString *)item2 third:(NSString *)item3
 {
-    //NSLog(item3);
     //button 1
     UIButton *refreshers1 = [UIButton buttonWithType:UIButtonTypeCustom];
     

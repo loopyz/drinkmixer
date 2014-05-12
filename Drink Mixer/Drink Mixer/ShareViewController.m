@@ -688,8 +688,6 @@
     
     [self.view addSubview: pickerView];
     
-    
-    
 }
 
 

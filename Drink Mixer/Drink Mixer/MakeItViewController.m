@@ -10,11 +10,13 @@
 #import "RecipeViewController.h"
 #import <Firebase/Firebase.h>
 #import "UIImage+ImageEffects.h"
+#import "NSStrinAdditions.h" // For storing images in Firebase
 
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 
 #define firebaseURL @"https://drinkmixer.firebaseio.com/"
+#define favoritesURL @"https://drinkmixer.firebaseio.com/users/lguo/favorites"
 
 @interface MakeItViewController ()
 {
@@ -22,9 +24,11 @@
     int ingredientCount;
     Firebase* firebase;
     NSString *name;
+    NSString *category;
     Firebase *ref;
     NSMutableDictionary *drinkInfo;
     bool favorited;
+    NSData *dataFromBase64;
 }
 @end
 
@@ -37,8 +41,9 @@
         recipe = [[NSMutableArray alloc] initWithObjects:nil];
         
         name = [parameters objectAtIndex:1];
+        category = [parameters objectAtIndex:0];
         
-        ref = [[[firebase childByAppendingPath:@"drinks"] childByAppendingPath:[parameters objectAtIndex:0]] childByAppendingPath:name];
+        ref = [[[firebase childByAppendingPath:@"drinks"] childByAppendingPath:category] childByAppendingPath:name];
 
         UILabel *drinkName = [[UILabel alloc] initWithFrame:CGRectMake(50, 200, 280, 25)];
         drinkName.textAlignment = NSTextAlignmentLeft;
@@ -55,8 +60,8 @@
         // Query Firebase to get ingredients
         [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
             if ([snapshot.name isEqual: @"image"]) { // Update background image from Firebase
-                NSData *dataFromBase64=[self base64DataFromString:snapshot.value];
-                UIImage *image = [[UIImage alloc]initWithData:dataFromBase64];
+                dataFromBase64 = [self base64DataFromString:snapshot.value];
+                UIImage *image = [[UIImage alloc] initWithData:dataFromBase64];
                 
                 UIImage *croppedImage = [image crop:CGRectMake(0, 300, SCREEN_WIDTH, 270)];
                 UIImage *blurredbg = [croppedImage applyLightEffect];
@@ -74,20 +79,15 @@
         }];
         
         //FIREBASE STUFF
-        NSString *url = @"https://drinkmixer.firebaseio.com/users/lguo/favorites/";
+        NSString *url = favoritesURL;
         NSString *drinkURL = [url stringByAppendingString:name];
         
-        Firebase* ref = [[Firebase alloc] initWithUrl:drinkURL];
+        Firebase* ref2 = [[Firebase alloc] initWithUrl:drinkURL];
         
-        [ref observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        [ref2 observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             if(snapshot.value == [NSNull null]) {
-                NSLog(drinkURL);
                 favorited = false;
             } else {
-//                NSString* firstName = snapshot.value[@"name"][@"first"];
-//                NSString* lastName = snapshot.value[@"name"][@"last"];
-//                NSLog(@"User julie's full name is: %@ %@", firstName, lastName);
-                NSLog(@"drink is favorited");
                 favorited = true;
             }
         }];
@@ -203,7 +203,6 @@
         
         //blurring image on bottom
         UIImage *croppedImage = [bg crop:CGRectMake(0, 300, SCREEN_WIDTH, 270)];
-        //UIImage *croppedImage = [self cropImage:bg fromRect:CGRectMake(0, 300, SCREEN_WIDTH, 270)];
         UIImage *blurredbg = [croppedImage applyLightEffect];
         UIImageView *blurredView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 250, SCREEN_WIDTH, 270)];
         blurredView.image = blurredbg;
@@ -228,10 +227,6 @@
     return self;
 }
 
-/*- (UIImage *)blurImage:(UIImage *)image
-{
-    
-}*/
 
 - (void)initFavButton
 {
@@ -243,27 +238,30 @@
     self.navigationItem.rightBarButtonItem = rbb;
 }
 
-// TODO: write to firebase associated with user if current drink is favorited or not
 - (void)favDrink
 {
     if (favorited) { // Currently favorited, user is tapping to un-favorite
         self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"favorite-faded.png"];
         favorited = false;
-        NSString *url = @"https://drinkmixer.firebaseio.com/users/lguo/favorites/";
-        NSString *drinkURL = [url stringByAppendingString:name];
+        NSString *drinkURL = [favoritesURL stringByAppendingString:name];
         
-        Firebase* ref = [[Firebase alloc] initWithUrl:drinkURL];
+        Firebase* refCopy = [[Firebase alloc] initWithUrl:drinkURL];
         
-        [ref removeValue];
+        [refCopy removeValue];
         
     } else {
         self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"favorite.png"];
         favorited = true;
         
-        Firebase* ref = [[Firebase alloc] initWithUrl:@"https://drinkmixer.firebaseio.com/users/lguo/favorites"];
-
-        [[ref childByAppendingPath:name] setValue:@"true"];
+        Firebase* refCopy = [[[Firebase alloc] initWithUrl:favoritesURL] childByAppendingPath:name];
         
+        NSMutableDictionary *favInfo = [[NSMutableDictionary alloc] init];
+        [favInfo setObject:category forKey:@"Category"];
+        if (dataFromBase64) { // In case image is missing so it doesn't crash
+            NSString *imageString = [NSString base64StringFromData:dataFromBase64 length:[dataFromBase64 length]];
+            [favInfo setObject:imageString forKey:@"Image"];
+        }
+        [refCopy setValue:favInfo];
     }
 }
 

@@ -17,10 +17,10 @@
 }
 
 @property (nonatomic, strong) Firebase* firebase;
-@property (nonatomic, strong) NSDictionary *myDrinks;
-@property (nonatomic, strong) NSMutableArray *drinkKeys;
+@property (nonatomic, strong) NSMutableArray *drinkCategories;
+@property (nonatomic, strong) NSMutableArray *drinkNames;
 
-@property (nonatomic, strong) NSArray *images;
+@property (nonatomic, strong) NSMutableArray *images;
 
 @property (nonatomic, strong) NSMutableArray *drinksDataSource;
 

@@ -9,11 +9,13 @@
 #import "HomeViewController.h"
 #import "CategoryViewController.h"
 #import "ShareViewController.h"
+#import "MakeItViewController.h"
+#import "NSStrinAdditions.h"
 #import <Firebase/Firebase.h>
 
 
 #define firebaseURL @"https://drinkmixer.firebaseio.com/"
-
+#define favoritesURL @"https://drinkmixer.firebaseio.com/users/lguo/favorites/"
 
 @interface HomeViewController ()
 
@@ -25,17 +27,12 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //hardcoded images YAY
-        self.images = [[NSArray alloc] initWithObjects: @"berrybubbly.png", @"greenberrybomb.png", @"passionmint.png", @"rosewatercooler.png", @"shakeupberry.png", @"strawberryshort.png", nil];
+        // Default images for while Firebase is loading
+        self.images = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"berrybubbly.png"], [UIImage imageNamed:@"greenberrybomb.png"], [UIImage imageNamed:@"passionmint.png"], [UIImage imageNamed:@"rosewatercooler.png"], [UIImage imageNamed:@"shakeupberry.png"], [UIImage imageNamed:@"strawberryshort.png"], nil];
         
         [self initializeNavBar];
         
-        //[self addBackgroundImage];
-        
         self.view.backgroundColor = [UIColor whiteColor];
-
-        
-        
     }
     return self;
 }
@@ -90,19 +87,22 @@
 
     CGRect frame = [[UIScreen mainScreen] applicationFrame];
     
-    //initialize firebase
-    self.firebase = [[Firebase alloc] initWithUrl:firebaseURL];
+    self.firebase = [[Firebase alloc] initWithUrl:favoritesURL];
     
-    Firebase *ref = [[self.firebase childByAppendingPath:@"drinks"] childByAppendingPath:@"Refreshers"];
+    self.drinkNames = [[NSMutableArray alloc] init];
+    self.drinkCategories = [[NSMutableArray alloc] init];
     
-    self.drinkKeys = [[NSMutableArray alloc] init];
-    
-    [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-        NSString* ingredient = snapshot.name;
-        [self.drinkKeys addObject:ingredient];
-        NSLog(@"Drink Keys Count: %lu", (unsigned long)[self.drinkKeys count]);
-        [_collectionView reloadData];
+    [self.firebase observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        [self.drinkNames addObject:snapshot.name];
+        [self.drinkCategories addObject:[snapshot.value objectForKey:@"Category"]];
         
+        if ([snapshot.value objectForKey:@"Image"]) {
+            // LUCY: For some reason this isn't reloading. It should be updating the image though. 
+            UIImage *image = [[UIImage alloc] initWithData:[self base64DataFromString:[snapshot.value objectForKey:@"Image"]]];
+            [self.images replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:[self.drinkNames count]] withObjects:@[image]];
+        }
+        
+        [_collectionView reloadData];
     }];
     
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc] init];
@@ -118,28 +118,111 @@
     [_collectionView setBackgroundColor:[UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1.0]];
     
     [self.view addSubview:_collectionView];
+}
+
+- (NSData *)base64DataFromString: (NSString *)string {
+    unsigned long ixtext, lentext;
+    unsigned char ch, input[4], output[3];
+    short i, ixinput;
+    Boolean flignore, flendtext = false;
+    const char *temporary;
+    NSMutableData *result;
     
-    NSLog(@"collection view added?!?");
+    if (!string) {
+        return [NSData data];
+    }
+    
+    ixtext = 0;
+    
+    temporary = [string UTF8String];
+    
+    lentext = [string length];
+    
+    result = [NSMutableData dataWithCapacity: lentext];
+    
+    ixinput = 0;
+    
+    while (true) {
+        if (ixtext >= lentext) {
+            break;
+        }
+        
+        ch = temporary[ixtext++];
+        
+        flignore = false;
+        
+        if ((ch >= 'A') && (ch <= 'Z')) {
+            ch = ch - 'A';
+        } else if ((ch >= 'a') && (ch <= 'z')) {
+            ch = ch - 'a' + 26;
+        } else if ((ch >= '0') && (ch <= '9')) {
+            ch = ch - '0' + 52;
+        } else if (ch == '+') {
+            ch = 62;
+        } else if (ch == '=') {
+            flendtext = true;
+        } else if (ch == '/') {
+            ch = 63;
+        } else {
+            flignore = true;
+        }
+        
+        if (!flignore) {
+            short ctcharsinput = 3;
+            Boolean flbreak = false;
+            
+            if (flendtext) {
+                if (ixinput == 0) {
+                    break;
+                }
+                
+                if ((ixinput == 1) || (ixinput == 2)) {
+                    ctcharsinput = 1;
+                } else {
+                    ctcharsinput = 2;
+                }
+                
+                ixinput = 3;
+                
+                flbreak = true;
+            }
+            
+            input[ixinput++] = ch;
+            
+            if (ixinput == 4) {
+                ixinput = 0;
+                
+                unsigned char0 = input[0];
+                unsigned char1 = input[1];
+                unsigned char2 = input[2];
+                unsigned char3 = input[3];
+                
+                output[0] = (char0 << 2) | ((char1 & 0x30) >> 4);
+                output[1] = ((char1 & 0x0F) << 4) | ((char2 & 0x3C) >> 2);
+                output[2] = ((char2 & 0x03) << 6) | (char3 & 0x3F);
+                
+                for (i = 0; i < ctcharsinput; i++) {
+                    [result appendBytes: &output[i] length: 1];
+                }
+            }
+            
+            if (flbreak) {
+                break;
+            }
+        }
+    }
+    
+    return result;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)addBackgroundImage
-{
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 326.4, 120.36)];
-    imgView.image = [UIImage imageNamed:@"profile.png"];
-    [self.view addSubview:imgView];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"drink keys count %d", [self.drinkKeys count]);
-    return [self.drinkKeys count];
-    //return 6;
+    return [self.drinkNames count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -147,15 +230,7 @@
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier"
                                                                          forIndexPath:indexPath];
     
-    NSString* key = [self.drinkKeys objectAtIndex:indexPath.row];
-    NSDictionary* drink = self.myDrinks[key];
-    
-    
-    
-    NSString *image = self.images[indexPath.row % [self.images count]];
-    
-    // TODO: query firebase for actual drink image and use it here
-    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:image]];
+    cell.backgroundColor = [UIColor colorWithPatternImage:self.images[indexPath.row]];
     
     UILabel *label = (UILabel*)[cell.contentView viewWithTag:1];
     
@@ -176,22 +251,17 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* key = [self.drinkKeys objectAtIndex:indexPath.row];
-    NSDictionary* drink = self.myDrinks[key];
+    NSString* name = [self.drinkNames objectAtIndex:indexPath.row];
+    NSString* category = [self.drinkCategories objectAtIndex:indexPath.row];
     
-    NSLog(@"SELECTED ITEM %@", drink);
-    
-    // TODO: launch new screen for displaying how to mix the given drink
+    MakeItViewController *mvc = [[MakeItViewController alloc] initCustom:@[category, name]];
+    [self.navigationController pushViewController:mvc animated:NO];
     
     [collectionView reloadData];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    //return CGSizeMake(screenWidth/2 - 100, screenHeight/4);
     return CGSizeMake(140, 140);
 }
 
