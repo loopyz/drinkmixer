@@ -95,11 +95,10 @@
     [self.firebase observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         [self.drinkNames addObject:snapshot.name];
         [self.drinkCategories addObject:[snapshot.value objectForKey:@"Category"]];
-        
+    
         if ([snapshot.value objectForKey:@"Image"]) {
-            // LUCY: For some reason this isn't reloading. It should be updating the image though. 
             UIImage *image = [[UIImage alloc] initWithData:[self base64DataFromString:[snapshot.value objectForKey:@"Image"]]];
-            [self.images replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:[self.drinkNames count]] withObjects:@[image]];
+            [self.images replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:([self.drinkNames count]-1)] withObjects:@[image]];
         }
         
         [_collectionView reloadData];
